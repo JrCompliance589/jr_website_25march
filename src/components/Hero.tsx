@@ -7,7 +7,7 @@ import { submitLeadWithAutoDetection } from '@/lib/api';
 
 const services = [
   { name: 'BIS Certification', href: '/approval/bis-certification', category: 'Technical' },
-  { name: 'ISI Certification', href: '/approval/isi-certificate', category: 'Technical' },
+  { name: 'ISI Certification', href: '/approval/isi-mark-certification', category: 'Technical' },
   { name: 'TEC Certification', href: '/approval/tec-certificate', category: 'Technical' },
   { name: 'WPC Certification', href: '/approval/wpc-certification', category: 'Technical' },
   { name: 'CDSCO Registration', href: '/approval/cdsco-registration', category: 'Technical' },

@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'How to Get AERB License | AERB Certificate Registration Consultants',
   description: 'We make the AERB license registration hassle-free. Get your AERB certificate today from best consultants. Click here to know how to get AERB approvals and know AERB certificate registration process.',
   keywords: 'AERB license, Atomic Energy Regulatory Board, AERB certificate, radiation equipment license, AERB consultants',
+  alternates: {
+    canonical: 'https://www.jrcompliance.com/approval/aerb-license',
+  },
   openGraph: {
     title: 'How to Get AERB License | AERB Certificate Registration Consultants',
     description: 'We make the AERB license registration hassle-free. Get your AERB certificate today from best consultants.',

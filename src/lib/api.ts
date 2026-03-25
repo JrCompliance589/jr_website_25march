@@ -16,6 +16,10 @@ export interface LeadPayload {
     utm_campaign?: string;
   };
   page_name?: string;
+  form_name?: string;
+  source?: string;
+  responsible?: string;
+  stage?: string;
 }
 
 // Response interface
@@ -29,6 +33,7 @@ export interface LeadResponse {
  * Determines the lead type based on the current page URL path
  * - /approval/* -> technical
  * - /corporate/* -> corporate
+ * - /ad/* -> technical (landing pages)
  * - others (contact, home, etc.) -> global
  */
 export function getLeadTypeFromPath(pathname: string): LeadType {
@@ -37,6 +42,9 @@ export function getLeadTypeFromPath(pathname: string): LeadType {
   }
   if (pathname.startsWith('/corporate')) {
     return 'corporate';
+  }
+  if (pathname.startsWith('/ad')) {
+    return 'technical';
   }
   return 'global';
 }
@@ -129,4 +137,46 @@ export async function submitLeadWithAutoDetection(
   }
   
   return submitLead(leadType, payload);
+}
+
+/**
+ * Submit a lead from ad landing pages with full CRM metadata
+ */
+export async function submitAdLead(
+  formData: { name: string; email: string; phone: string },
+  meta: {
+    form_name: string;
+    source: string;
+    responsible: string;
+    stage: string;
+    leadType: LeadType;
+  },
+  message?: string
+): Promise<LeadResponse> {
+  if (typeof window === 'undefined') {
+    throw new Error('This function can only be called on the client side');
+  }
+
+  const utmParams = getUtmParameters();
+
+  const payload: LeadPayload = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    page_name: meta.form_name,
+    form_name: meta.form_name,
+    source: meta.source,
+    responsible: meta.responsible,
+    stage: meta.stage,
+  };
+
+  if (message) {
+    payload.message = message;
+  }
+
+  if (utmParams) {
+    payload.page_parameters = utmParams;
+  }
+
+  return submitLead(meta.leadType, payload);
 }

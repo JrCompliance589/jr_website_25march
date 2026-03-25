@@ -97,7 +97,7 @@ const technicalServices: ServiceItem[] = [
   },
   { 
     name: 'ISI Certification', 
-    href: '/approval/isi-certificate', 
+    href: '/approval/isi-mark-certification', 
     description: 'ISI Mark certification for quality assurance of products',
     logo: '/services_logo/isi.png',
     features: ['ISI Mark', 'Quality Testing', 'Product Certification', 'Renewal'],
