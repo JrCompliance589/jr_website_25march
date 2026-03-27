@@ -284,21 +284,6 @@ export default function ServicePageTemplate({
                 {description}
               </p>
 
-              {/* Stats Row */}
-              {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-10">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-all">
-                    <div className={`text-3xl sm:text-4xl font-bold ${colors.text} flex items-center justify-center gap-2`}>
-                      {stat.value}
-                      {stat.label.toLowerCase().includes('rating') && (
-                        <Star size={22} className="text-amber-400 fill-amber-400" />
-                      )}
-                    </div>
-                    <p className="text-sm text-gray-400 mt-2 font-medium">{stat.label}</p>
-                  </div>
-                ))}
-              </div> */}
-
               {/* Why Choose Section */}
               <div className="hidden lg:block">
                 <h3 className="text-lg font-semibold text-white mb-4">
@@ -607,47 +592,6 @@ export default function ServicePageTemplate({
         </div>
       </section>
 
-      {/* Benefits Section - Dark Theme */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-3 sm:mb-4">
-              <Sparkles size={14} className={`${colors.text} sm:w-4 sm:h-4`} />
-              <span className="text-xs sm:text-sm font-medium text-gray-300">Benefits</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
-              Why Choose <span className={colors.text}>{title}?</span>
-            </h2>
-            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
-              {description}
-            </p>
-          </div>
-
-          {/* Service Info Section */}
-          {serviceInfo && (
-            <div className="mb-10 sm:mb-14 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10">
-              <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
-                {serviceInfo}
-              </p>
-            </div>
-          )}
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all"
-              >
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform`}>
-                  <CheckCircle size={20} className="text-white sm:w-6 sm:h-6" />
-                </div>
-                <p className="text-sm sm:text-base text-white font-medium">{benefit}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Process Section - Dark Theme */}
       <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -700,6 +644,53 @@ export default function ServicePageTemplate({
               >
                 <CheckCircle size={16} className={`${colors.text} sm:w-5 sm:h-5 flex-shrink-0`} />
                 <span className="text-sm sm:text-base text-white">{doc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      
+
+
+
+
+      {/* Benefits Section - Dark Theme */}
+      <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-3 sm:mb-4">
+              <Sparkles size={14} className={`${colors.text} sm:w-4 sm:h-4`} />
+              <span className="text-xs sm:text-sm font-medium text-gray-300">Benefits</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
+              Why Choose <span className={colors.text}>JR Compliance?</span>
+            </h2>
+            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+              {description}
+            </p>
+          </div>
+
+          {/* Service Info Section */}
+          {serviceInfo && (
+            <div className="mb-10 sm:mb-14 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
+                {serviceInfo}
+              </p>
+            </div>
+          )}
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all"
+              >
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform`}>
+                  <CheckCircle size={20} className="text-white sm:w-6 sm:h-6" />
+                </div>
+                <p className="text-sm sm:text-base text-white font-medium" dangerouslySetInnerHTML={{ __html: benefit }} />
               </div>
             ))}
           </div>

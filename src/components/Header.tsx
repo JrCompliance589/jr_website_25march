@@ -164,7 +164,7 @@ const technicalCategories = [
     icon: Cpu,
     items: [
       { name: 'BIS Certification', href: '/approval/bis-certification', desc: 'Foreign manufacturer cert' },
-      { name: 'ISI Mark', href: '/approval/isi-mark-certification', desc: 'Indian standards mark' },
+      { name: 'ISI Mark Certification', href: '/approval/isi-mark-certification', desc: 'Indian standards mark' },
       { name: 'FMCS Certification', href: '/approval/bis-certification/fmcs-bis-certification', desc: 'Foreign manufacturer scheme' },
       { name: 'CRS Certification', href: '/approval/bis-certification/crs-certification', desc: 'Compulsory registration' },
       { name: 'Scheme-X', href: '/approval/bis-certification/scheme-x', desc: 'Self-declaration scheme' },
