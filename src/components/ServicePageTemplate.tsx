@@ -284,27 +284,6 @@ export default function ServicePageTemplate({
                 {description}
               </p>
 
-              {/* Why Choose Section */}
-              <div className="hidden lg:block">
-                <h3 className="text-lg font-semibold text-white mb-4">
-                  Why Choose <span className={colors.text}>JR Compliance?</span>
-                </h3>
-                <div className="grid grid-cols-3 gap-4">
-                  {[
-                    { icon: Zap, title: 'Speed', desc: 'Quotes in seconds, certification in days!' },
-                    { icon: Users, title: 'Service', desc: 'Dedicated support, quick replies!' },
-                    { icon: Award, title: 'Quality', desc: 'Expert guidance, 100% compliance!' },
-                  ].map((item, index) => (
-                    <div key={item.title} className="group p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all">
-                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                        <item.icon size={20} className="text-white" />
-                      </div>
-                      <h4 className="font-semibold text-white mb-1">{item.title}</h4>
-                      <p className="text-xs text-gray-400">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
             {/* Right Column - Form Card */}
@@ -568,27 +547,7 @@ export default function ServicePageTemplate({
             </div>
           </div>
 
-          {/* Mobile Why Choose Section */}
-          <div className="lg:hidden mt-6 sm:mt-8">
-            <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 text-center">
-              Why Choose <span className={colors.text}>JR Compliance?</span>
-            </h3>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {[
-                { icon: Zap, title: 'Speed', desc: 'Quick quotes!' },
-                { icon: Users, title: 'Service', desc: 'Best support!' },
-                { icon: Award, title: 'Quality', desc: 'Expert team!' },
-              ].map((item) => (
-                <div key={item.title} className="text-center p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 border border-white/5">
-                  <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-gradient-to-br ${colors.gradient} flex items-center justify-center mx-auto mb-1.5 sm:mb-2`}>
-                    <item.icon size={12} className="text-white sm:w-4 sm:h-4" />
-                  </div>
-                  <h4 className="font-semibold text-white text-[10px] sm:text-xs mb-0.5">{item.title}</h4>
-                  <p className="text-[8px] sm:text-[10px] text-gray-400">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+
         </div>
       </section>
 
@@ -656,30 +615,35 @@ export default function ServicePageTemplate({
 
 
 
-      {/* Benefits Section - Dark Theme */}
+      {/* Why Choose JR Compliance Section */}
       <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-3 sm:mb-4">
-              <Sparkles size={14} className={`${colors.text} sm:w-4 sm:h-4`} />
-              <span className="text-xs sm:text-sm font-medium text-gray-300">Benefits</span>
-            </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
               Why Choose <span className={colors.text}>JR Compliance?</span>
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
-              {description}
-            </p>
-          </div>
-
-          {/* Service Info Section */}
-          {serviceInfo && (
-            <div className="mb-10 sm:mb-14 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10">
-              <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed text-center max-w-4xl mx-auto">
+            {serviceInfo && (
+              <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto mb-6">
                 {serviceInfo}
               </p>
-            </div>
-          )}
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            {[
+              { icon: Zap, title: 'Speed', desc: 'Quotes in seconds, certification in days!' },
+              { icon: Users, title: 'Expert Guidance', desc: 'Dedicated support, quick replies!' },
+              { icon: Award, title: 'Quality', desc: 'Expert guidance, 100% compliance!' },
+            ].map((item) => (
+              <div key={item.title} className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all text-center">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-3 sm:mb-4 mx-auto group-hover:scale-110 transition-transform`}>
+                  <item.icon size={20} className="text-white sm:w-6 sm:h-6" />
+                </div>
+                <h4 className="font-semibold text-white mb-1 text-sm sm:text-base">{item.title}</h4>
+                <p className="text-xs sm:text-sm text-gray-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {benefits.map((benefit, index) => (
@@ -775,7 +739,7 @@ export default function ServicePageTemplate({
               <span>Call: 1800-121-410-410</span>
             </a>
             <a
-              href="https://wa.me/919266450125"
+              href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg sm:rounded-xl border border-white/10 transition-all text-sm sm:text-base"

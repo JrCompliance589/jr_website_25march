@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: 'ISI Mark Certification - Get Expert Guidance With JR Compliance',
   description: 'Looking for ISI Mark Certification in India? JR Compliance helps businesses to get certification approval quickly and smoothly. Apply today.',
   keywords: 'ISI Mark Certification, ISI Mark Certification in India, ISI Certificate, ISI Mark, ISI Certification Consultant.',
+  robots: {
+    index: true,
+    follow: true,
+  },
   alternates: {
     canonical: 'https://www.jrcompliance.com/approval/isi-mark-certification',
   },
@@ -27,6 +31,13 @@ const isiProductSchema = {
   "brand": {
     "@type": "Brand",
     "name": "JR Compliance"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.2",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "31546"
   }
 };
 

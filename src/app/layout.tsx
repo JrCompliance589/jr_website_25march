@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   authors: [{ name: "JR Compliance" }],
   icons: {
     icon: [
-      { url: "/JRlogo2.png", type: "image/png" },
+      // { url: "/JRlogo2.png", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
     ],
     shortcut: "/JRlogo2.png",

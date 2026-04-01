@@ -137,7 +137,7 @@ export default function AdLandingTemplate({
             <Image src="/JRlogo2.png" alt="JR Compliance" width={250} height={75} className="w-auto h-12 sm:h-14 lg:h-16 object-contain brightness-0 invert" />
             <div className="flex items-center gap-2 sm:gap-3">
               <a
-                href="https://wa.me/919266450125"
+                href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-lg transition-colors"
@@ -546,7 +546,7 @@ export default function AdLandingTemplate({
             <a href="tel:+919266663636" className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r ${colors.gradient} text-white font-semibold rounded-lg sm:rounded-xl hover:opacity-90 transition-all shadow-lg text-sm sm:text-base`}>
               <Phone size={18} className="sm:w-5 sm:h-5" /><span>Call: +91 92666 63636</span>
             </a>
-            <a href="https://wa.me/919266450125" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg sm:rounded-xl border border-white/10 transition-all text-sm sm:text-base">
+            <a href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg sm:rounded-xl border border-white/10 transition-all text-sm sm:text-base">
               <MessageCircle size={18} className="sm:w-5 sm:h-5" /><span>WhatsApp Us</span>
             </a>
           </div>
