@@ -31,7 +31,7 @@ interface ServicePageProps {
   title: string;
   subtitle: string;
   description: string;
-  serviceInfo?: string;
+  serviceInfo?: React.ReactNode;
   icon?: LucideIcon;
   logo?: string;
   color: string;

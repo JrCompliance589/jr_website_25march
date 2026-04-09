@@ -165,7 +165,7 @@ export async function submitAdLead(
     phone: formData.phone,
     page_name: meta.form_name,
     form_name: meta.form_name,
-    source: meta.source,
+    source: window.location.href,
     responsible: meta.responsible,
     stage: meta.stage,
   };

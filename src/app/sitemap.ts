@@ -54,6 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'epr-plastic-waste',
     'epr-tyre-waste',
     'epr-used-oil-waste',
+    'bis-crs-registration',
     'isi-mark-certification',
     'mtcte-certification',
     'non-dealer-possession-license',

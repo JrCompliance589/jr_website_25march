@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
         destination: '/approval/fmcs-certification',
         permanent: true,
       },
+      {
+        source: '/approval/isi-certificate',
+        destination: '/approval/isi-mark-certification',
+        permanent: true,
+      },
+      {
+        source: '/approval/bis-certification/crs-certification',
+        destination: '/approval/bis-crs-registration',
+        permanent: true,
+      },
     ];
   },
 };
