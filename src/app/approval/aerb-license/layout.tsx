@@ -2,15 +2,16 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'How to Get AERB License | AERB Certificate Registration Consultants',
-  description: 'We make the AERB license registration hassle-free. Get your AERB certificate today from best consultants. Click here to know how to get AERB approvals and know AERB certificate registration process.',
-  keywords: 'AERB license, Atomic Energy Regulatory Board, AERB certificate, radiation equipment license, AERB consultants',
+  title: 'Get AERB License Online | AERB Certificate For X-Ray',
+  description: 'Get your AERB License today from the best consultants. Visit today for hassle-free AERB approvals and know the AERB certificate registration process for x-ray.',
+  keywords: 'AERB License, AERB Certificate, AERB Certification, AERB Registration, Atomic Energy Regulatory Board, AERB License Consultant, AERB Approval, AERB Certificate For X-Ray',
+  robots: { index: true, follow: true },
   alternates: {
     canonical: 'https://www.jrcompliance.com/approval/aerb-license',
   },
   openGraph: {
-    title: 'How to Get AERB License | AERB Certificate Registration Consultants',
-    description: 'We make the AERB license registration hassle-free. Get your AERB certificate today from best consultants.',
+    title: 'Get AERB License Online | AERB Certificate For X-Ray',
+    description: 'Get your AERB License today from the best consultants. Visit today for hassle-free AERB approvals and know the AERB certificate registration process for x-ray.',
     url: 'https://www.jrcompliance.com/approval/aerb-license',
     siteName: 'JR Compliance',
     locale: 'en_IN',
@@ -95,31 +96,21 @@ const aerbBreadcrumbSchema = {
 };
 
 const aerbProductSchema = {
-  "@context": "https://schema.org",
+  "@context": "https://schema.org/",
   "@type": "Product",
-  "name": "AERB License Consultant in India",
-  "image": "https://jrcompliance.com/JRlogo2.png",
-  "description": "With JR Compliance, get your AERB (Atomic Energy Regulatory Board) license. We guarantee obedience to safety requirements and help with applications for approvals about nuclear plants, medical X-ray machines, and radiation equipment.",
+  "name": "Get AERB License Online | AERB Certificate For X-Ray",
+  "image": "https://www.jrcompliance.com/JRlogo2.png",
+  "description": "Get your AERB License today from the best consultants. Visit today for hassle-free AERB approvals and know the AERB certificate registration process for x-ray.",
   "brand": {
     "@type": "Brand",
     "name": "JR Compliance"
   },
-  "review": {
-    "@type": "Review",
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "4.2",
-      "bestRating": "5"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "JR Compliance"
-    }
-  },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.2",
-    "reviewCount": "37"
+    "ratingValue": "4.3",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "106"
   }
 };
 
