@@ -21,9 +21,8 @@ import {
   Sparkles,
   AlertCircle,
   Calendar,
-  Globe,
 } from 'lucide-react';
-import { submitAdLead, LeadType } from '@/lib/api';
+import { submitAdLead } from '@/lib/api';
 
 const countryCodes = [
   { code: '+1', flag: '🇺🇸', name: 'USA', minLen: 10, maxLen: 10 },
@@ -70,8 +69,6 @@ interface AdGlobalProps {
   formName: string;
   source: string;
   responsible: string;
-  stage: string;
-  leadType: LeadType;
 }
 
 const colorClasses: Record<string, { bg: string; text: string; gradient: string; light: string; border: string }> = {
@@ -110,8 +107,6 @@ export default function AdGlobalTemplate({
   formName,
   source,
   responsible,
-  stage,
-  leadType,
 }: AdGlobalProps) {
   const router = useRouter();
   const formRef = useRef<HTMLDivElement>(null);
@@ -135,6 +130,8 @@ export default function AdGlobalTemplate({
   const [consultSubmitError, setConsultSubmitError] = useState<string | null>(null);
 
   const colors = colorClasses[color] || colorClasses.blue;
+  const stage = 'Global';
+  const leadType = 'global' as const;
   const isPhoneValid = formData.phone.length >= countryCode.minLen && formData.phone.length <= countryCode.maxLen;
   const currentStep = isPhoneValid ? 3 : formData.email.includes('@') ? 2 : formData.name.length > 2 ? 1 : 0;
   const isConsultPhoneValid = consultFormData.phone.length >= consultCountryCode.minLen && consultFormData.phone.length <= consultCountryCode.maxLen;

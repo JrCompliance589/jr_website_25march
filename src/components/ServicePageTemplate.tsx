@@ -32,6 +32,7 @@ interface ServicePageProps {
   subtitle: string;
   description: string;
   serviceInfo?: React.ReactNode;
+  processTitle?: React.ReactNode;
   icon?: LucideIcon;
   logo?: string;
   color: string;
@@ -48,6 +49,7 @@ export default function ServicePageTemplate({
   subtitle,
   description,
   serviceInfo,
+  processTitle,
   icon: Icon,
   logo,
   color,
@@ -105,6 +107,11 @@ export default function ServicePageTemplate({
   };
 
   const colors = colorClasses[color] || colorClasses.blue;
+  const resolvedProcessTitle = processTitle ?? (
+    <>
+      Simple <span className={colors.text}>Step-by-Step</span> Process
+    </>
+  );
 
   // Show sticky bar on scroll, hide when form visible or near footer
   useEffect(() => {
@@ -560,7 +567,7 @@ export default function ServicePageTemplate({
               <span className="text-xs sm:text-sm font-medium text-gray-300">Process</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
-              Simple <span className={colors.text}>Step-by-Step</span> Process
+              {resolvedProcessTitle}
             </h2>
           </div>
 

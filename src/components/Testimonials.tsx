@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
 const testimonials = [
@@ -33,6 +33,13 @@ const testimonials = [
     content: 'Extremely professional company and very prompt service. I am associated with them from last 4 to 5 years. I am extremely happy and satisfied with the service given by them.',
     rating: 5,
   },
+  {
+    name: 'Ekaterina Okopnaia',
+    role: 'Representative',
+    company: 'Acryl Salavat',
+    content: 'As a representative of Acryl Salavat, a Russian manufacturer, I want to thank Pulkit Arora and Lalit Gupta for their diligence and very productive work on our FMCS project. They worked quickly, helped us through different issues, and remained flexible even though our payment approval system and contract process are very complex. We successfully passed the audit, received the license, and completed its renewal within the established timeframe. As a Russian entity, we face certain challenges, but with the JR team\'s help, we are successfully overcoming them.',
+    rating: 5,
+  },
 ];
 
 export default function Testimonials() {
@@ -60,31 +67,25 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        {/* Desktop View - 3 columns with highlighted center */}
+        {/* Desktop View */}
         <div className="hidden lg:block">
           <div className="relative">
-            {/* Background Cards - Faded */}
             <div className="grid grid-cols-3 gap-6">
-              {testimonials.slice(0, 3).map((testimonial, index) => (
+              {testimonials.map((testimonial) => (
                 <motion.div
                   key={testimonial.name}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`p-6 rounded-2xl transition-all duration-300 ${
-                    index === 1 
-                      ? 'bg-white shadow-xl border border-gray-100 scale-105' 
-                      : 'bg-gray-50 border border-gray-100 opacity-70'
-                  }`}
+                  className="p-6 rounded-2xl transition-all duration-300 bg-white shadow-xl border border-gray-100"
                 >
-                  <p className={`mb-6 leading-relaxed ${index === 1 ? 'text-gray-700' : 'text-gray-500'}`}>
+                  <p className="mb-6 leading-relaxed text-gray-700">
                     {testimonial.content}
                   </p>
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
+                      <div className="w-12 h-12 rounded-full bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
                         {testimonial.name.charAt(0)}
                       </div>
                       <div>
@@ -99,33 +100,6 @@ export default function Testimonials() {
                 </motion.div>
               ))}
             </div>
-
-            {/* Navigation */}
-            {/* <div className="flex items-center justify-center gap-4 mt-8">
-              <button
-                onClick={prevTestimonial}
-                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-              >
-                <ChevronLeft size={20} className="text-gray-600" />
-              </button>
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === 1 ? 'bg-blue-600 w-6' : 'bg-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-              <button
-                onClick={nextTestimonial}
-                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-              >
-                <ChevronRight size={20} className="text-gray-600" />
-              </button>
-            </div> */}
           </div>
         </div>
 
@@ -142,7 +116,7 @@ export default function Testimonials() {
             </p>
             
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
+              <div className="w-12 h-12 rounded-full bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
                 {testimonials[activeIndex].name.charAt(0)}
               </div>
               <div>

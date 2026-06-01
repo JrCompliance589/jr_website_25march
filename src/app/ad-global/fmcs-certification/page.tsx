@@ -10,8 +10,6 @@ export default function FMCSCertificationLP() {
       formName="FMCS Certification - Google Ads - Global-LP"
       source="Advertising"
       responsible="Lalit"
-      stage="Technical"
-      leadType="technical"
       process={[
         { step: 'Eligibility Assessment', description: 'Evaluate your products and determine applicable Indian standards for FMCS.' },
         { step: 'AIR Appointment', description: 'Appoint JR Compliance as your Authorized Indian Representative (AIR).' },

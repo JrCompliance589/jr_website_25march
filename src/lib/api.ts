@@ -33,17 +33,25 @@ export interface LeadResponse {
  * Determines the lead type based on the current page URL path
  * - /approval/* -> technical
  * - /corporate/* -> corporate
+ * - /ad-global/* -> global
  * - /ad/* -> technical (landing pages)
  * - others (contact, home, etc.) -> global
  */
+function matchesRoute(pathname: string, route: string): boolean {
+  return pathname === route || pathname.startsWith(`${route}/`);
+}
+
 export function getLeadTypeFromPath(pathname: string): LeadType {
-  if (pathname.startsWith('/approval')) {
+  if (matchesRoute(pathname, '/approval')) {
     return 'technical';
   }
-  if (pathname.startsWith('/corporate')) {
+  if (matchesRoute(pathname, '/corporate')) {
     return 'corporate';
   }
-  if (pathname.startsWith('/ad')) {
+  if (matchesRoute(pathname, '/ad-global')) {
+    return 'global';
+  }
+  if (matchesRoute(pathname, '/ad')) {
     return 'technical';
   }
   return 'global';

@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'dealer-possession-license',
     'delhi-pollution-control',
     'epr-battery-waste',
-    'epr-certification',
+    'epr-registration',
     'epr-e-waste',
     'epr-plastic-waste',
     'epr-tyre-waste',
@@ -60,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'non-dealer-possession-license',
     'state-pollution-board',
     'tec-certificate',
-    'wpc-certification',
+    'wpc-license',
   ].map((slug) => ({
     url: `${baseUrl}/approval/${slug}`,
     lastModified: currentDate,

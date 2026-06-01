@@ -106,8 +106,8 @@ const technicalServices: ServiceItem[] = [
     shadowColor: 'shadow-teal-500/25',
   },
   { 
-    name: 'EPR Compliance', 
-    href: '/approval/epr-certification', 
+    name: 'EPR Registration', 
+    href: '/approval/epr-registration', 
     description: 'Extended Producer Responsibility for waste management',
     icon: Shield,
     features: ['E-Waste', 'Plastic Waste', 'Battery Waste', 'Tyre Waste'],

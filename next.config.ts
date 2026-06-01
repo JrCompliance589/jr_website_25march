@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/approval/wpc-certification',
+        destination: '/approval/wpc-license',
+        permanent: true,
+      },
+      {
         source: '/approval/bis-certification/fmcs-bis-certification',
         destination: '/approval/fmcs-certification',
         permanent: true,
@@ -15,7 +20,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/approval/bis-certification/crs-certification',
-        destination: '/approval/bis-crs-registration',
+        destination: '/approval/wpc-license',
         permanent: true,
       },
     ];

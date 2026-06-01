@@ -180,7 +180,7 @@ const technicalCategories = [
       { name: 'CPCB Guidelines', href: '/approval/cpcb-guidelines', desc: 'Compliance guidelines' },
       { name: 'State Pollution Board', href: '/approval/state-pollution-board', desc: 'State level NOC' },
       { name: 'Delhi Pollution Control', href: '/approval/delhi-pollution-control', desc: 'DPCC compliance' },
-      { name: 'EPR Certification', href: '/approval/epr-certification', desc: 'Extended producer resp.' },
+      { name: 'EPR Registration', href: '/approval/epr-registration', desc: 'Extended producer resp.' },
       { name: 'EPR E-Waste', href: '/approval/epr-e-waste', desc: 'Electronic waste EPR' },
       { name: 'EPR Battery Waste', href: '/approval/epr-battery-waste', desc: 'Battery waste EPR' },
       { name: 'EPR Plastic Waste', href: '/approval/epr-plastic-waste', desc: 'Plastic waste EPR' },
@@ -205,7 +205,7 @@ const technicalCategories = [
     description: 'Wireless Planning & Coordination approvals',
     icon: Wifi,
     items: [
-      { name: 'WPC ETA Approval', href: '/approval/wpc-certification', desc: 'Equipment type approval' },
+      { name: 'WPC License', href: '/approval/wpc-license', desc: 'Equipment type approval' },
       { name: 'Dealer Possession License', href: '/approval/dealer-possession-license', desc: 'For dealers' },
       { name: 'Non-Dealer License', href: '/approval/non-dealer-possession-license', desc: 'End user license' },
     ]

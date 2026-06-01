@@ -10,8 +10,6 @@ export default function BISCertificationLP() {
       formName="BIS Certification - Google Ads - Global-LP"
       source="Advertising"
       responsible="Lalit"
-      stage="Technical"
-      leadType="technical"
       process={[
         { step: 'Product Analysis', description: 'Analyze your product to determine applicable BIS standards and certification scheme.' },
         { step: 'Lab Testing', description: 'Coordinate product testing at BIS-recognized laboratories to verify compliance.' },

@@ -11,8 +11,6 @@ export default function ISIMarkCertificationLP() {
       formName="ISI Mark Certification - Google Ads - Global-LP"
       source="Advertising"
       responsible="Lalit"
-      stage="Technical"
-      leadType="technical"
       process={[]}
       documents={[]}
       faqs={[]}

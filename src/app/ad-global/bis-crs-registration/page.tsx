@@ -10,8 +10,6 @@ export default function BISCRSRegistrationLP() {
       formName="BIS CRS Registration - Google Ads - Global-LP"
       source="Advertising"
       responsible="Lalit"
-      stage="Technical"
-      leadType="technical"
       process={[
         { step: 'Documentation Prep', description: 'Collect and prepare all necessary documents including product details and testing reports.' },
         { step: 'Standard Mapping', description: 'Map your product to the correct CRS category and identify relevant Indian standards.' },

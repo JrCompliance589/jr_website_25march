@@ -16,8 +16,8 @@ const corporateServices = [
 const technicalServices = [
   { name: 'BIS Certification', href: '/approval/bis-certification' },
   { name: 'AERB License', href: '/approval/aerb-license' },
-  { name: 'EPR Certification', href: '/approval/epr-certification' },
-  { name: 'WPC Certification', href: '/approval/wpc-certification' },
+  { name: 'EPR Registration', href: '/approval/epr-registration' },
+  { name: 'WPC License', href: '/approval/wpc-license' },
 ];
 
 const quickLinks = [
