@@ -27,7 +27,7 @@ const quickLinks = [
 ];
 
 const usefulLinks = [
-  { name: 'Blog', href: 'https://blogs.jrcompliance.com/', external: true },
+  { name: 'Blog', href: 'https://www.jrcompliance.com/blogs', external: true },
 ];
 
 export default function Footer() {
@@ -118,10 +118,10 @@ export default function Footer() {
                 {usefulLinks.map((link) => (
                   <li key={link.name}>
                     {link.external ? (
-                      <a 
-                        href={link.href} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-gray-400 hover:text-white transition-colors text-sm"
                       >
                         {link.name}
@@ -175,7 +175,7 @@ export default function Footer() {
                 We do not promote or provide any government-issued documents. We are a private compliance consultancy firm offering professional guidance and support to business owners in obtaining the relevant certifications from the respective government authorities.
               </p>
             </div>
-            
+
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-gray-500 text-sm">
                 © {new Date().getFullYear()} JR Compliance. All rights reserved.

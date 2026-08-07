@@ -29,8 +29,10 @@ import { submitLeadWithAutoDetection, getUtmParameters } from '@/lib/api';
 
 interface ServicePageProps {
   title: string;
-  subtitle: string;
-  description: string;
+  subtitle?: string;
+  description: React.ReactNode;
+  additionalContent?: React.ReactNode;
+  showDefaultSections?: boolean;
   serviceInfo?: React.ReactNode;
   processTitle?: React.ReactNode;
   icon?: LucideIcon;
@@ -48,6 +50,8 @@ export default function ServicePageTemplate({
   title,
   subtitle,
   description,
+  additionalContent,
+  showDefaultSections = true,
   serviceInfo,
   processTitle,
   icon: Icon,
@@ -227,16 +231,18 @@ export default function ServicePageTemplate({
             {/* Left Column - Content */}
             <div className="text-center lg:text-left">
               {/* Service Badge */}
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-4 sm:mb-6">
-                <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg ${logo ? 'bg-white' : `bg-gradient-to-br ${colors.gradient}`} flex items-center justify-center overflow-hidden`}>
-                  {logo ? (
-                    <Image src={logo} alt={title} width={24} height={24} className="object-contain" />
-                  ) : Icon ? (
-                    <Icon size={14} className="text-white sm:w-4 sm:h-4" />
-                  ) : null}
+              {(subtitle || logo || Icon) && (
+                <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-4 sm:mb-6">
+                  <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg ${logo ? 'bg-white' : `bg-gradient-to-br ${colors.gradient}`} flex items-center justify-center overflow-hidden`}>
+                    {logo ? (
+                      <Image src={logo} alt={title} width={24} height={24} className="object-contain" />
+                    ) : Icon ? (
+                      <Icon size={14} className="text-white sm:w-4 sm:h-4" />
+                    ) : null}
+                  </div>
+                  {subtitle && <span className="text-xs sm:text-sm font-medium text-gray-300">{subtitle}</span>}
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-gray-300">{subtitle}</span>
-              </div>
+              )}
 
               {/* Main Heading */}
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
@@ -246,9 +252,11 @@ export default function ServicePageTemplate({
               </h1>
               
               {/* Subtitle */}
-              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 sm:mb-6 max-w-2xl">
-                {subtitle}
-              </p>
+              {subtitle && (
+                <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 sm:mb-6 max-w-2xl">
+                  {subtitle}
+                </p>
+              )}
 
               {/* Trusted Clients Logo Reel - Hidden on mobile, shown on sm+ */}
               <div className="hidden sm:block mb-6 overflow-hidden">
@@ -287,9 +295,9 @@ export default function ServicePageTemplate({
               </div>
 
               {/* Description */}
-              <p className="text-sm sm:text-base lg:text-lg text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <div className="text-sm sm:text-base lg:text-lg text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 {description}
-              </p>
+              </div>
 
             </div>
 
@@ -558,8 +566,10 @@ export default function ServicePageTemplate({
         </div>
       </section>
 
+      {additionalContent}
+
       {/* Process Section - Dark Theme */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
+      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-3 sm:mb-4">
@@ -591,10 +601,10 @@ export default function ServicePageTemplate({
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* Documents Section - Dark Theme */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
+      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -614,7 +624,7 @@ export default function ServicePageTemplate({
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
 
       
@@ -623,7 +633,7 @@ export default function ServicePageTemplate({
 
 
       {/* Why Choose JR Compliance Section */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
+      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -666,10 +676,10 @@ export default function ServicePageTemplate({
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* FAQs Section - Dark Theme */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
+      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -726,7 +736,7 @@ export default function ServicePageTemplate({
             </div>
           )}
         </div>
-      </section>
+      </section>}
 
       {/* CTA Section - Dark Theme */}
       <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
