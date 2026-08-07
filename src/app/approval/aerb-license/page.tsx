@@ -1,6 +1,13 @@
 import Link from 'next/link';
-import type { ReactNode } from 'react';
-import { CheckCircle, FileCheck, Radiation } from 'lucide-react';
+import { Radiation } from 'lucide-react';
+import {
+  ApprovalContentLayout,
+  ContentList,
+  ContentParagraph,
+  ContentSectionCard,
+  FAQItem,
+  FAQSection,
+} from '@/components/ApprovalContent';
 import AERBLeadForm from './AERBLeadForm';
 
 const title = 'AERB License';
@@ -147,38 +154,6 @@ const faqs = [
   },
 ];
 
-function ContentList({
-  items,
-  numbered,
-}: {
-  items: ReactNode[];
-  numbered?: boolean;
-}) {
-  const ListTag = numbered ? 'ol' : 'ul';
-
-  return (
-    <ListTag className={`mt-5 grid gap-3 ${numbered ? 'list-decimal pl-6' : ''}`}>
-      {items.map((item, index) => (
-        <li
-          key={typeof item === 'string' ? item : index}
-          className={`rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm leading-relaxed text-gray-200 sm:text-base ${
-            numbered ? 'pl-3' : 'flex gap-3'
-          }`}
-        >
-          {numbered ? (
-            item
-          ) : (
-            <>
-              <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-400" />
-              <span>{item}</span>
-            </>
-          )}
-        </li>
-      ))}
-    </ListTag>
-  );
-}
-
 export default function AERBLicensePage() {
   return (
     <>
@@ -222,57 +197,30 @@ export default function AERBLicensePage() {
         </div>
       </section>
 
-      <article className="bg-slate-950">
-        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <ApprovalContentLayout>
           <div className="space-y-8">
             {sections.map((section) => (
-              <section
-                key={section.heading}
-                className="rounded-xl border border-white/10 bg-slate-900/70 p-5 shadow-xl shadow-black/10 sm:p-7"
-              >
-                <div className="mb-4 flex items-start gap-3">
-                  <div className="mt-1 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-500">
-                    <FileCheck className="h-5 w-5 text-white" />
-                  </div>
-                  <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
-                    {section.heading}
-                  </h2>
-                </div>
+              <ContentSectionCard key={section.heading} heading={section.heading}>
 
                 {section.body?.map((paragraph, index) => (
-                  <p
-                    key={`${section.heading}-${index}`}
-                    className="mt-4 text-sm leading-relaxed text-gray-300 sm:text-base"
-                  >
+                  <ContentParagraph key={`${section.heading}-${index}`}>
                     {paragraph}
-                  </p>
+                  </ContentParagraph>
                 ))}
 
                 {section.list && (
                   <ContentList items={section.list} numbered={section.numbered} />
                 )}
-              </section>
+              </ContentSectionCard>
             ))}
           </div>
 
-          <section className="mt-8 rounded-xl border border-white/10 bg-slate-900/70 p-5 shadow-xl shadow-black/10 sm:p-7">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">FAQs</h2>
-            <div className="mt-6 space-y-4">
-              {faqs.map((faq) => (
-                <div
-                  key={faq.question}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4"
-                >
-                  <h3 className="text-base font-semibold text-white">{faq.question}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-300 sm:text-base">
-                    {faq.answer}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-      </article>
+          <FAQSection heading="FAQs">
+            {faqs.map((faq) => (
+              <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+            ))}
+          </FAQSection>
+      </ApprovalContentLayout>
     </>
   );
 }

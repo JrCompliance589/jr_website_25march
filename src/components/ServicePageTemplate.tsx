@@ -174,7 +174,7 @@ export default function ServicePageTemplate({
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError(null);
-    
+
     try {
       await submitLeadWithAutoDetection(
         { name: formData.name, email: formData.email, phone: formData.phone },
@@ -187,8 +187,8 @@ export default function ServicePageTemplate({
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitError(
-        error instanceof Error 
-          ? error.message 
+        error instanceof Error
+          ? error.message
           : 'Something went wrong. Please try again or call us directly.'
       );
     } finally {
@@ -245,12 +245,12 @@ export default function ServicePageTemplate({
               )}
 
               {/* Main Heading */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
-                <span className={`text-transparent bg-clip-text bg-gradient-to-r ${colors.gradient}`}>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 sm:mb-6">
+                <span className={`md:whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r ${colors.gradient}`}>
                   {title}
                 </span>
               </h1>
-              
+
               {/* Subtitle */}
               {subtitle && (
                 <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 sm:mb-6 max-w-2xl">
@@ -627,7 +627,7 @@ export default function ServicePageTemplate({
       </section>}
 
 
-      
+
 
 
 
