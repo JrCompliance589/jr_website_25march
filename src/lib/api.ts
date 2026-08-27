@@ -1,5 +1,5 @@
 // Webhook API Configuration
-const WEBHOOK_BASE_URL = 'https://webhook.jrcompliance.com';
+const WEBHOOK_BASE_URL = 'https://testhook.jrcompliance.com';
 
 // Lead Types
 export type LeadType = 'corporate' | 'technical' | 'global';
@@ -187,4 +187,113 @@ export async function submitAdLead(
   }
 
   return submitLead(meta.leadType, payload);
+}
+export type WhatsappButtonLocation =
+  | 'navbar'
+  | 'navbar_corporate_menu'
+  | 'navbar_technical_menu'
+  | 'navbar_mobile'
+  | 'floating';
+
+interface WhatsappEventPayload {
+  event_info: string;
+  page_name: string;
+  text: string;
+  metadata: {
+    button_location: WhatsappButtonLocation;
+    page_url: string;
+    pathname: string;
+    whatsapp_url: string;
+
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+  };
+}
+
+const WHATSAPP_EVENT_URL =
+  'https://testhook.jrcompliance.com/whatsapp';
+
+export function trackWhatsappClick({
+  buttonLocation,
+  text,
+  whatsappUrl,
+}: {
+  buttonLocation: WhatsappButtonLocation;
+  text: string;
+  whatsappUrl: string;
+}) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  const searchParams = new URLSearchParams(
+    window.location.search
+  );
+
+  const metadata: WhatsappEventPayload['metadata'] = {
+    button_location: buttonLocation,
+    page_url: window.location.href,
+    pathname: window.location.pathname,
+    whatsapp_url: whatsappUrl,
+  };
+
+  const utmSource =
+    searchParams.get('utm_source');
+
+  const utmMedium =
+    searchParams.get('utm_medium');
+
+  const utmCampaign =
+    searchParams.get('utm_campaign');
+
+  if (utmSource) {
+    metadata.utm_source = utmSource;
+  }
+
+  if (utmMedium) {
+    metadata.utm_medium = utmMedium;
+  }
+
+  if (utmCampaign) {
+    metadata.utm_campaign = utmCampaign;
+  }
+
+  const payload: WhatsappEventPayload = {
+    event_info: 'whatsapp_click',
+
+    page_name:
+      document.title ||
+      window.location.pathname,
+
+    text,
+
+    metadata,
+  };
+
+  /*
+   * Fire-and-forget.
+   *
+   * We intentionally don't await this request,
+   * because WhatsApp should open immediately
+   * even if tracking fails.
+   */
+  fetch(WHATSAPP_EVENT_URL, {
+    method: 'POST',
+
+    headers: {
+      'Content-Type': 'application/json',
+    },
+
+    body: JSON.stringify(payload),
+
+    keepalive: true,
+
+    credentials: 'omit',
+  }).catch((error) => {
+    console.error(
+      'WhatsApp tracking failed:',
+      error
+    );
+  });
 }

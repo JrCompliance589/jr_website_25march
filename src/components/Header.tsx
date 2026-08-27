@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
+import { trackWhatsappClick } from '@/lib/api';
 import { Menu, X, ChevronDown, ChevronRight, Phone, ArrowRight, Search, Building2, FileText, Globe, Shield, Lightbulb, UtensilsCrossed, TrendingUp, Calculator, Users, Coins, Cpu, Factory, Radio, Wifi, Home, MessageCircle } from 'lucide-react';
 
 // Corporate Services Categories
@@ -166,7 +167,7 @@ const technicalCategories = [
       { name: 'BIS Certification', href: '/approval/bis-certification', desc: 'Foreign manufacturer cert' },
       { name: 'ISI Mark Certification', href: '/approval/isi-mark-certification', desc: 'Indian standards mark' },
       { name: 'FMCS Certification', href: '/approval/bis-certification/fmcs-bis-certification', desc: 'Foreign manufacturer scheme' },
-      { name: 'CRS Certification', href: '/approval/bis-certification/crs-certification', desc: 'Compulsory registration' },
+      { name: 'CRS Certification', href: '/approval/bis-crs-registration', desc: 'Compulsory registration' },
       { name: 'Scheme-X', href: '/approval/bis-certification/scheme-x', desc: 'Self-declaration scheme' },
     ]
   },
@@ -225,6 +226,19 @@ const technicalCategories = [
     ]
   },
 ];
+
+const WHATSAPP_TEXT =
+  'Hi, I need help with compliance services';
+
+const WHATSAPP_URL =
+  'https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0';
+
+const TECHNICAL_WHATSAPP_TEXT =
+  'Hi, I need help with technical certifications';
+
+const TECHNICAL_WHATSAPP_URL =
+  'https://wa.me/919266450125?text=Hi%2C%20I%20need%20help%20with%20technical%20certifications';
+
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -445,14 +459,21 @@ export default function Header() {
                                     </div>
                                   </div>
                                   <a
-                                    href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors"
-                                  >
-                                    <MessageCircle size={14} />
-                                    <span>WhatsApp</span>
-                                  </a>
+  href={WHATSAPP_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={() => {
+    trackWhatsappClick({
+      buttonLocation: 'navbar_corporate_menu',
+      text: WHATSAPP_TEXT,
+      whatsappUrl: WHATSAPP_URL,
+    });
+  }}
+  className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors"
+>
+  <MessageCircle size={14} />
+  <span>WhatsApp</span>
+</a>
                                 </div>
                               </div>
                             ))}
@@ -609,14 +630,21 @@ export default function Header() {
                                     </div>
                                   </div>
                                   <a
-                                    href="https://wa.me/919266450125?text=Hi%2C%20I%20need%20help%20with%20technical%20certifications"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors"
-                                  >
-                                    <MessageCircle size={14} />
-                                    <span>WhatsApp</span>
-                                  </a>
+  href={TECHNICAL_WHATSAPP_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={() => {
+    trackWhatsappClick({
+      buttonLocation: 'navbar_technical_menu',
+      text: TECHNICAL_WHATSAPP_TEXT,
+      whatsappUrl: TECHNICAL_WHATSAPP_URL,
+    });
+  }}
+  className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors"
+>
+  <MessageCircle size={14} />
+  <span>WhatsApp</span>
+</a>
                                 </div>
                               </div>
                             ))}
@@ -659,14 +687,21 @@ export default function Header() {
 
             {/* CTA Button */}
             <a
-              href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg transition-all hover:scale-105 active:scale-95"
-            >
-              <MessageCircle size={18} />
-              <span>WhatsApp</span>
-            </a>
+  href={WHATSAPP_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={() => {
+    trackWhatsappClick({
+      buttonLocation: 'navbar',
+      text: WHATSAPP_TEXT,
+      whatsappUrl: WHATSAPP_URL,
+    });
+  }}
+  className="flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg transition-all hover:scale-105 active:scale-95"
+>
+  <MessageCircle size={18} />
+  <span>WhatsApp</span>
+</a>
           </div>
 
           {/* Mobile Actions */}
@@ -939,15 +974,23 @@ function MobileMenuModal({
                 <span>1800-121-410-410</span>
               </a>
               <a
-                href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={onClose}
-                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-center font-bold text-base rounded-xl transition-colors shadow-lg shadow-green-500/25"
-              >
-                <MessageCircle size={20} />
-                <span>WhatsApp Us</span>
-              </a>
+  href={WHATSAPP_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={() => {
+    trackWhatsappClick({
+      buttonLocation: 'navbar_mobile',
+      text: WHATSAPP_TEXT,
+      whatsappUrl: WHATSAPP_URL,
+    });
+
+    onClose();
+  }}
+  className="flex items-center justify-center gap-2 w-full px-4 py-3.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-center font-bold text-base rounded-xl transition-colors shadow-lg shadow-green-500/25"
+>
+  <MessageCircle size={20} />
+  <span>WhatsApp Us</span>
+</a>
             </div>
           </div>
         </div>

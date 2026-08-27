@@ -5,7 +5,7 @@ import {
   ContentSectionCard,
   FAQItem,
   FAQSection,
-} from '@/components/ApprovalContent';
+} from "@/components/ApprovalContent";
 
 export default function CDSCORegistrationContent() {
   return (
@@ -30,40 +30,55 @@ export default function CDSCORegistrationContent() {
             numbered
             items={[
               <>
-                <strong className="text-white">Drug manufacturers</strong> – Companies that make
-                pharmaceutical products within India need CDSCO approval before they can produce
-                and sell those drugs.
+                <strong className="text-white">Drug manufacturers</strong> –
+                Companies that make pharmaceutical products within India need
+                CDSCO approval before they can produce and sell those drugs.
               </>,
               <>
-                <strong className="text-white">Medical device manufacturers</strong> – Same rule
-                applies here. If you&apos;re making medical devices in India, you need clearance
-                depending on the risk class of your device.
+                <strong className="text-white">
+                  Medical device manufacturers
+                </strong>{" "}
+                – Same rule applies here. If you&apos;re making medical devices
+                in India, you need clearance depending on the risk class of your
+                device.
               </>,
               <>
-                <strong className="text-white">Importers</strong> – Anyone bringing drugs or medical
-                devices into India from another country has to get CDSCO approval first. You can&apos;t
-                just import and sell without it.
+                <strong className="text-white">Importers</strong> – Anyone
+                bringing drugs or medical devices into India from another
+                country has to get CDSCO approval first. You can&apos;t just
+                import and sell without it.
               </>,
               <>
-                <strong className="text-white">Clinical research organizations or sponsors</strong>{' '}
-                – If a company or institute wants to conduct clinical trials in India, whether for a
-                new drug or device, they need to apply through CDSCO.
+                <strong className="text-white">
+                  Clinical research organizations or sponsors
+                </strong>{" "}
+                – If a company or institute wants to conduct clinical trials in
+                India, whether for a new drug or device, they need to apply
+                through CDSCO.
               </>,
               <>
-                <strong className="text-white">Distributors and marketers, in some cases</strong> –
-                Depending on the product and how it&apos;s being sold, even distributors sometimes need
-                to be part of the registration or licensing process.
+                <strong className="text-white">
+                  Distributors and marketers, in some cases
+                </strong>{" "}
+                – Depending on the product and how it&apos;s being sold, even
+                distributors sometimes need to be part of the registration or
+                licensing process.
               </>,
               <>
-                <strong className="text-white">Foreign companies wanting to sell in India</strong>{' '}
-                – International pharma or device companies that want their products available in the
-                Indian market also go through CDSCO, usually via a local authorized agent or
-                representative.
+                <strong className="text-white">
+                  Foreign companies wanting to sell in India
+                </strong>{" "}
+                – International pharma or device companies that want their
+                products available in the Indian market also go through CDSCO,
+                usually via a local authorized agent or representative.
               </>,
               <>
-                <strong className="text-white">Loan CDSCO license holders</strong> – Companies that
-                don&apos;t have their own manufacturing setup but want to manufacture through another
-                licensed facility also need to apply, this is called a loan license.
+                <strong className="text-white">
+                  Loan CDSCO license holders
+                </strong>{" "}
+                – Companies that don&apos;t have their own manufacturing setup
+                but want to manufacture through another licensed facility also
+                need to apply, this is called a loan license.
               </>,
             ]}
           />
@@ -72,55 +87,87 @@ export default function CDSCORegistrationContent() {
         <ContentSectionCard heading="Divisions of the CDSCO Certification :">
           <div className="overflow-x-auto rounded-lg border border-white/10">
             <table className="min-w-[720px] w-full border-collapse text-left text-sm text-gray-300 sm:text-base">
-              <caption className="sr-only">CDSCO certification class risk evaluations</caption>
+              <caption className="sr-only">
+                CDSCO certification class risk evaluations
+              </caption>
               <thead className="bg-white/10 text-white">
                 <tr>
-                  <th scope="col" className="border border-white/10 px-4 py-3 font-semibold">
+                  <th
+                    scope="col"
+                    className="border border-white/10 px-4 py-3 font-semibold"
+                  >
                     Class Type
                   </th>
-                  <th scope="col" className="border border-white/10 px-4 py-3 font-semibold">
+                  <th
+                    scope="col"
+                    className="border border-white/10 px-4 py-3 font-semibold"
+                  >
                     Risk Evaluation
                   </th>
-                  <th scope="col" className="border border-white/10 px-4 py-3 font-semibold">
+                  <th
+                    scope="col"
+                    className="border border-white/10 px-4 py-3 font-semibold"
+                  >
                     Explanation
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row" className="border border-white/10 px-4 py-3 font-semibold text-white">
+                  <th
+                    scope="row"
+                    className="border border-white/10 px-4 py-3 font-semibold text-white"
+                  >
                     Class A
                   </th>
                   <td className="border border-white/10 px-4 py-3">Low risk</td>
-                  <td className="border border-white/10 px-4 py-3">The safest like Thermometers.</td>
+                  <td className="border border-white/10 px-4 py-3">
+                    The safest like Thermometers.
+                  </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="border border-white/10 px-4 py-3 font-semibold text-white">
+                  <th
+                    scope="row"
+                    className="border border-white/10 px-4 py-3 font-semibold text-white"
+                  >
                     Class B
                   </th>
-                  <td className="border border-white/10 px-4 py-3">Low to moderate risk</td>
                   <td className="border border-white/10 px-4 py-3">
-                    A bit more documentation is needed, but its manageable like a hospital bed,
-                    syringes etc .
+                    Low to moderate risk
+                  </td>
+                  <td className="border border-white/10 px-4 py-3">
+                    A bit more documentation is needed, but its manageable like
+                    a hospital bed, syringes etc .
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="border border-white/10 px-4 py-3 font-semibold text-white">
+                  <th
+                    scope="row"
+                    className="border border-white/10 px-4 py-3 font-semibold text-white"
+                  >
                     Class C
                   </th>
-                  <td className="border border-white/10 px-4 py-3">Moderate to high risk</td>
                   <td className="border border-white/10 px-4 py-3">
-                    The bar goes slightly up here , like ventilators, dialysis machine etc.
+                    Moderate to high risk
+                  </td>
+                  <td className="border border-white/10 px-4 py-3">
+                    The bar goes slightly up here , like ventilators, dialysis
+                    machine etc.
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" className="border border-white/10 px-4 py-3 font-semibold text-white">
+                  <th
+                    scope="row"
+                    className="border border-white/10 px-4 py-3 font-semibold text-white"
+                  >
                     Class D
                   </th>
-                  <td className="border border-white/10 px-4 py-3">High risk</td>
                   <td className="border border-white/10 px-4 py-3">
-                    The toughest and most detailed approval process, since even a small defect can
-                    be dangerous.
+                    High risk
+                  </td>
+                  <td className="border border-white/10 px-4 py-3">
+                    The toughest and most detailed approval process, since even
+                    a small defect can be dangerous.
                   </td>
                 </tr>
               </tbody>
@@ -130,10 +177,11 @@ export default function CDSCORegistrationContent() {
 
         <ContentSectionCard heading="Why choose JR Compliance?">
           <ContentParagraph>
-            At JR Compliance, our regulatory experts genuinely know their way around the Medical
-            Device Rules 2017 and the Drug &amp; Cosmetics Act, so you&apos;re not left figuring things
-            out on your own. Our CDSCO Registration consultants take care of the whole process,
-            device classification, risk assessment, clinical evidence, and{' '}
+            At JR Compliance, our regulatory experts genuinely know their way
+            around the Medical Device Rules 2017 and the Drug &amp; Cosmetics
+            Act, so you&apos;re not left figuring things out on your own. Our
+            CDSCO Registration consultants take care of the whole process,
+            device classification, risk assessment, clinical evidence, and{" "}
             <a
               href="https://cdscoonline.gov.in/CDSCO/homepage"
               target="_blank"
@@ -141,24 +189,42 @@ export default function CDSCORegistrationContent() {
               className="text-cyan-400 underline hover:text-cyan-300"
             >
               SUGAM portal
-            </a>{' '}
-            submissions, without you having to chase any of it. Our team stays in touch with
-            notified bodies, handles the technical paperwork, and deals with CDSCO directly on your
-            behalf. Even after registration, we&apos;re still around for vigilance reporting, license
-            renewals, and keeping things compliant. That&apos;s honestly why so many companies rely on
-            JR Compliance for smooth CDSCO certification across India.
+            </a>{" "}
+            submissions, without you having to chase any of it. Our team stays
+            in touch with notified bodies, handles the technical paperwork, and
+            deals with CDSCO directly on your behalf. Even after registration,
+            we&apos;re still around for vigilance reporting, license renewals,
+            and keeping things compliant. That&apos;s honestly why so many
+            companies rely on JR Compliance for smooth CDSCO certification
+            across India.
           </ContentParagraph>
+
+          <div className="mx-auto mt-8 max-w-3xl">
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl shadow-black/30">
+              <div className="aspect-video">
+                <iframe
+                  className="h-full w-full"
+                  src="https://www.youtube.com/embed/Hp1NopV4524"
+                  title="CDSCO Registration - JR Compliance"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
         </ContentSectionCard>
 
         <ContentSectionCard heading="Easy Step-By-Step Guide :">
           <ContentList
             items={[
-              'Determine device classification (A, B, C, D) under MDR 2017.',
-              'Document preparation Compile clinical data, and regulatory documents.',
-              'Create an account and submit the application on the CDSCO portal.',
-              'CDSCO reviews the application and may request additional information',
-              'Facility inspection for Class C and D devices (if applicable).',
-              'Receive the CDSCO registration certificate for your device.',
+              "Determine device classification (A, B, C, D) under MDR 2017.",
+              "Document preparation Compile clinical data, and regulatory documents.",
+              "Create an account and submit the application on the CDSCO portal.",
+              "CDSCO reviews the application and may request additional information",
+              "Facility inspection for Class C and D devices (if applicable).",
+              "Receive the CDSCO registration certificate for your device.",
             ]}
           />
         </ContentSectionCard>
@@ -166,14 +232,14 @@ export default function CDSCORegistrationContent() {
         <ContentSectionCard heading="Required documents for online apply :">
           <ContentList
             items={[
-              'Application Form',
-              'Device Master File',
-              'ISO 13485 Certificate',
-              'Free Sale Certificate',
-              'Declaration of Conformity',
-              'Clinical Evidence/Data',
-              'Device Labeling & IFU',
-              'Authorized Agent Agreement',
+              "Application Form",
+              "Device Master File",
+              "ISO 13485 Certificate",
+              "Free Sale Certificate",
+              "Declaration of Conformity",
+              "Clinical Evidence/Data",
+              "Device Labeling & IFU",
+              "Authorized Agent Agreement",
             ]}
           />
         </ContentSectionCard>

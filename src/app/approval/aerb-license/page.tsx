@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Radiation } from 'lucide-react';
+import Link from "next/link";
+import { Radiation } from "lucide-react";
 import {
   ApprovalContentLayout,
   ContentList,
@@ -7,66 +7,68 @@ import {
   ContentSectionCard,
   FAQItem,
   FAQSection,
-} from '@/components/ApprovalContent';
-import AERBLeadForm from './AERBLeadForm';
+} from "@/components/ApprovalContent";
+import AERBLeadForm from "./AERBLeadForm";
 
-const title = 'AERB License';
+const title = "AERB License";
 
 const intro =
   "AERB License is a mandatory requirement for hospitals, diagnostic centres, dental clinics, veterinary hospitals, and organizations that use radiation-emitting equipment such as X-ray machines, CT scanners, mammography units, and other medical imaging devices. The licensing process helps ensure that radiation equipment is installed, operated, and maintained in accordance with India's prescribed radiation safety standards.";
 
 const sections = [
   {
-    heading: 'What is an AERB License?',
+    heading: "What is an AERB License?",
     body: [
-      'An AERB Certificate is an official license issued by the Atomic Energy Regulatory Board that attests to the safety and legal compliance of your radiation-related facility or equipment in India. AERB is the statutory body established on 15th November 1983 by the President of India by utilising the powers vested under Section 27 of the Atomic Energy Act, 1962, and the Atomic Energy (Radiation Protection) Rules, 2004. To reduce the radiation effect for human safety, the AERB certification is required for both those importing radiation-producing machinery and producing medical diagnostic X-ray products domestically.',
+      "An AERB Certificate is an official license issued by the Atomic Energy Regulatory Board that attests to the safety and legal compliance of your radiation-related facility or equipment in India. AERB is the statutory body established on 15th November 1983 by the President of India by utilising the powers vested under Section 27 of the Atomic Energy Act, 1962, and the Atomic Energy (Radiation Protection) Rules, 2004. To reduce the radiation effect for human safety, the AERB certification is required for both those importing radiation-producing machinery and producing medical diagnostic X-ray products domestically.",
     ],
   },
   {
-    heading: 'Why is an AERB License required?',
-    body: ['Key Reasons Why an AERB License is Required'],
+    heading: "Why is an AERB License required?",
+    body: ["Key Reasons Why an AERB License is Required"],
     list: [
-      'Protects Patients and Healthcare Workers: Ensures that radiation exposure remains within permissible safety limits, reducing health risks to patients, doctors, technicians, and the general public.',
-      'Legal Compliance: Operating radiation-generating equipment without the required AERB consent is prohibited under Indian law. Healthcare facilities and businesses must obtain the appropriate approval before using such equipment.',
-      'Radiation Safety Standards: The Radiation Safety Certificate verifies that the equipment installation, room shielding, quality assurance, and operational procedures meet national radiation safety standards before granting approval.',
-      'Ensures Proper Installation and Operation: The licensing process confirms that the equipment is installed correctly, operated by qualified personnel, and maintained according to prescribed safety guidelines.',
-      'Prevents Radiation Hazards: Regular inspections and regulatory oversight help prevent accidental radiation exposure and ensure continuous compliance with safety requirements.',
-      'Mandatory for Registration and Renewal: Medical institutions, diagnostic centres, hospitals, dental clinics, and industrial facilities using radiation equipment must obtain and periodically renew their AERB Approval Process through the e-LORA portal.',
+      "Protects Patients and Healthcare Workers: Ensures that radiation exposure remains within permissible safety limits, reducing health risks to patients, doctors, technicians, and the general public.",
+      "Legal Compliance: Operating radiation-generating equipment without the required AERB consent is prohibited under Indian law. Healthcare facilities and businesses must obtain the appropriate approval before using such equipment.",
+      "Radiation Safety Standards: The Radiation Safety Certificate verifies that the equipment installation, room shielding, quality assurance, and operational procedures meet national radiation safety standards before granting approval.",
+      "Ensures Proper Installation and Operation: The licensing process confirms that the equipment is installed correctly, operated by qualified personnel, and maintained according to prescribed safety guidelines.",
+      "Prevents Radiation Hazards: Regular inspections and regulatory oversight help prevent accidental radiation exposure and ensure continuous compliance with safety requirements.",
+      "Mandatory for Registration and Renewal: Medical institutions, diagnostic centres, hospitals, dental clinics, and industrial facilities using radiation equipment must obtain and periodically renew their AERB Approval Process through the e-LORA portal.",
     ],
   },
   {
-    heading: 'Who needs an AERB License?',
+    heading: "Who needs an AERB License?",
     body: [
-      'An AERB License Application is required by any individual, organization, or healthcare facility that manufactures, imports, installs, possesses, or operates radiation-emitting equipment or radioactive materials in India. Here are more examples:',
+      "An AERB License Application is required by any individual, organization, or healthcare facility that manufactures, imports, installs, possesses, or operates radiation-emitting equipment or radioactive materials in India. Here are more examples:",
     ],
     list: [
-      'Hospitals',
-      'Dental clinics',
-      'Diagnostic Centers',
-      'Industrial Radiography Firms',
-      'Manufacturers Of Radiation Equipment',
-      'Research Laboratories',
-      'Manufacturer/Suppliers/Service Agency For Diagnostic Radiology',
+      "Hospitals",
+      "Dental clinics",
+      "Diagnostic Centers",
+      "Industrial Radiography Firms",
+      "Manufacturers Of Radiation Equipment",
+      "Research Laboratories",
+      "Manufacturer/Suppliers/Service Agency For Diagnostic Radiology",
     ],
   },
   {
-    heading: 'Which documents are required for an AERB License?',
+    heading: "Which documents are required for an AERB License?",
     list: [
-      'Company registration proof',
-      'RSO qualification documents',
-      'Radiation Safety and Equipment Reports',
-      'Layout plan with shielding details',
-      'Radiation safety procedures',
-      'Personnel monitoring arrangements',
-      'Previous license (if renewal)',
+      "Company registration proof",
+      "RSO qualification documents",
+      "Radiation Safety and Equipment Reports",
+      "Layout plan with shielding details",
+      "Radiation safety procedures",
+      "Personnel monitoring arrangements",
+      "Previous license (if renewal)",
     ],
   },
   {
-    heading: 'AERB Registration Process',
-    body: ['We follow the steps below for the AERB Registration Process procedure:'],
+    heading: "AERB Registration Process",
+    body: [
+      "We follow the steps below for the AERB Registration Process procedure:",
+    ],
     list: [
       <>
-        Registration on{' '}
+        Registration on{" "}
         <a
           href="https://elora.aerb.gov.in/ELORA/populateLoginAction.htm"
           target="_blank"
@@ -74,83 +76,87 @@ const sections = [
           className="font-semibold text-orange-300 underline decoration-orange-300/60 underline-offset-4 transition-colors hover:text-orange-200"
         >
           eLORA
-        </a>{' '}
+        </a>{" "}
         Portal
       </>,
-      'Provide detailed information regarding your facility',
-      'Upload all necessary Documents',
-      'Inspection (If Necessary)',
-      'Get Approval & AERB Certificate',
+      "Provide detailed information regarding your facility",
+      "Upload all necessary Documents",
+      "Inspection (If Necessary)",
+      "Get Approval & AERB Certificate",
     ],
     numbered: true,
   },
   {
-    heading: 'Why choose JR Compliance?',
+    heading: "Why choose JR Compliance?",
     body: [
       <>
-        JR Compliance provides comprehensive support for obtaining Atomic Energy Regulatory Board
-        licenses for radiation-generating equipment and facilities. Our AERB Radiation Safety
-        License Consultant guides you through the entire licensing process, from initial application
-        on the eLORA portal to final approval. We assist with Radiation Safety Officer (RSO)
-        requirements, facility layout planning, and shielding calculations to meet AERB safety
-        standards. Our team prepares all necessary documentation, including safety procedures and
-        personnel monitoring arrangements. We coordinate facility inspections and help address any
-        observations from AERB officials promptly. After post-licensing, we provide support for
-        license renewals, amendments, and compliance monitoring to ensure your facility maintains
-        AERB standards throughout operations.JR Compliance India&apos;s most trusted compliance
-        partner for BIS, ISI,{' '}
+        JR Compliance provides comprehensive support for obtaining Atomic Energy
+        Regulatory Board licenses for radiation-generating equipment and
+        facilities. Our AERB Radiation Safety License Consultant guides you
+        through the entire licensing process, from initial application on the
+        eLORA portal to final approval. We assist with Radiation Safety Officer
+        (RSO) requirements, facility layout planning, and shielding calculations
+        to meet AERB safety standards. Our team prepares all necessary
+        documentation, including safety procedures and personnel monitoring
+        arrangements. We coordinate facility inspections and help address any
+        observations from AERB officials promptly. After post-licensing, we
+        provide support for license renewals, amendments, and compliance
+        monitoring to ensure your facility maintains AERB standards throughout
+        operations.JR Compliance India&apos;s most trusted compliance partner
+        for BIS, ISI,{" "}
         <Link
           href="https://www.jrcompliance.com/approval/fmcs-certification"
           className="font-semibold text-orange-300 underline decoration-orange-300/60 underline-offset-4 transition-colors hover:text-orange-200"
         >
           FMCS
         </Link>
-        , GST &amp; 100+ regulatory services. Reach your business goals with our expert consultants.
+        , GST &amp; 100+ regulatory services. Reach your business goals with our
+        expert consultants.
       </>,
     ],
   },
   {
-    heading: 'What are the benefits of hiring a consultant?',
+    heading: "What are the benefits of hiring a consultant?",
     list: [
-      'Expert Knowledge of AERB Regulations',
-      'Faster Approval Process',
-      'Error-Free Documentation',
-      'End-to-End Assistance',
-      'Compliance with Safety Standards',
-      'Saves Time and Resources',
-      'Support for AERB Inspections',
-      'Assistance with Renewals and Amendments',
-      'Reduced Risk of License Rejection',
-      'Ongoing Regulatory Support',
+      "Expert Knowledge of AERB Regulations",
+      "Faster Approval Process",
+      "Error-Free Documentation",
+      "End-to-End Assistance",
+      "Compliance with Safety Standards",
+      "Saves Time and Resources",
+      "Support for AERB Inspections",
+      "Assistance with Renewals and Amendments",
+      "Reduced Risk of License Rejection",
+      "Ongoing Regulatory Support",
     ],
   },
 ];
 
 const faqs = [
   {
-    question: 'What is an AERB license?',
+    question: "What is an AERB license?",
     answer:
-      'AERB license is mandatory authorization for possessing and using radiation-generating equipment and radioactive sources.',
+      "AERB license is mandatory authorization for possessing and using radiation-generating equipment and radioactive sources.",
   },
   {
-    question: 'Who needs an AERB Certification?',
+    question: "Who needs an AERB Certification?",
     answer:
-      'AERB certification is mandatory for manufacturing indigenous medical diagnostic X-ray products and importing machinery with radiation to minimize the radiation effect for the safety of humans.',
+      "AERB certification is mandatory for manufacturing indigenous medical diagnostic X-ray products and importing machinery with radiation to minimize the radiation effect for the safety of humans.",
   },
   {
-    question: 'What is RSO?',
+    question: "What is RSO?",
     answer:
-      'RSO is also known as a Radiation Safety Officer, who is a qualified person and responsible for radiation safety at the facility.',
+      "RSO is also known as a Radiation Safety Officer, who is a qualified person and responsible for radiation safety at the facility.",
   },
   {
-    question: 'How long does an AERB Registration take?',
+    question: "How long does an AERB Registration take?",
     answer:
-      'AERB registration typically takes 2-4 months, depending on equipment type and documentation.',
+      "AERB registration typically takes 2-4 months, depending on equipment type and documentation.",
   },
   {
-    question: 'What is the validity of the AERB Compliance?',
+    question: "What is the validity of the AERB Compliance?",
     answer:
-      'AERB Certificate validity varies from 1-5 years, depending on the equipment category.',
+      "AERB Certificate validity varies from 1-5 years, depending on the equipment category.",
   },
 ];
 
@@ -198,28 +204,49 @@ export default function AERBLicensePage() {
       </section>
 
       <ApprovalContentLayout>
-          <div className="space-y-8">
-            {sections.map((section) => (
-              <ContentSectionCard key={section.heading} heading={section.heading}>
+        <div className="space-y-8">
+          {sections.map((section) => (
+            <ContentSectionCard key={section.heading} heading={section.heading}>
+              {section.body?.map((paragraph, index) => (
+                <ContentParagraph key={`${section.heading}-${index}`}>
+                  {paragraph}
+                </ContentParagraph>
+              ))}
 
-                {section.body?.map((paragraph, index) => (
-                  <ContentParagraph key={`${section.heading}-${index}`}>
-                    {paragraph}
-                  </ContentParagraph>
-                ))}
+              {section.list && (
+                <ContentList items={section.list} numbered={section.numbered} />
+              )}
 
-                {section.list && (
-                  <ContentList items={section.list} numbered={section.numbered} />
-                )}
-              </ContentSectionCard>
-            ))}
-          </div>
+              {section.heading === "Why choose JR Compliance?" && (
+                <div className="mx-auto mt-8 max-w-3xl">
+                  <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl shadow-black/30">
+                    <div className="aspect-video">
+                      <iframe
+                        className="h-full w-full"
+                        src="https://www.youtube.com/embed/4lk8O0ayIAY"
+                        title="AERB License - JR Compliance"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </ContentSectionCard>
+          ))}
+        </div>
 
-          <FAQSection heading="FAQs">
-            {faqs.map((faq) => (
-              <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
-            ))}
-          </FAQSection>
+        <FAQSection heading="FAQs">
+          {faqs.map((faq) => (
+            <FAQItem
+              key={faq.question}
+              question={faq.question}
+              answer={faq.answer}
+            />
+          ))}
+        </FAQSection>
       </ApprovalContentLayout>
     </>
   );
