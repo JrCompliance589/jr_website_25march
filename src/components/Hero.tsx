@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, ArrowRight, Phone, CheckCircle, ChevronRight, Users, Clock, Award, Shield, BadgeCheck, Lock, Star, AlertCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Search, ArrowRight, Phone, CheckCircle, Users, Clock, Award, Shield, BadgeCheck, Lock, Star, AlertCircle } from 'lucide-react';
 import { submitLeadWithAutoDetection } from '@/lib/api';
 
 const services = [
@@ -37,6 +38,7 @@ const features = [
 ];
 
 export default function Hero() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -51,7 +53,6 @@ export default function Hero() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [showMessageBox, setShowMessageBox] = useState(false);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const formRef = useRef<HTMLDivElement>(null);
@@ -169,6 +170,7 @@ export default function Hero() {
         formData.message || undefined,
       );
       setIsSubmitted(true);
+      router.push('/thank-you');
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitError(
@@ -429,29 +431,20 @@ export default function Hero() {
                         </div>
                       </div>
 
-                      {/* Collapsible Message Field */}
+                      {/* Message Field */}
                       <div className="relative">
-                        <button
-                          type="button"
-                          onClick={() => setShowMessageBox(!showMessageBox)}
-                          className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-cyan-400 transition-colors"
-                        >
-                          <ChevronRight size={14} className={`transition-transform ${showMessageBox ? 'rotate-90' : ''}`} />
-                          <span>Add a message (optional)</span>
-                        </button>
-                        {showMessageBox && (
-                          <div className="mt-2 relative group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg sm:rounded-xl opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity" />
-                            <textarea
-                              name="message"
-                              placeholder="Tell us about your requirements..."
-                              value={formData.message}
-                              onChange={handleChange}
-                              rows={3}
-                              className="relative w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 focus:border-cyan-500/50 focus:bg-white/10 text-white text-sm placeholder-gray-500 transition-all outline-none resize-none"
-                            />
-                          </div>
-                        )}
+                        <div className="relative group">
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg sm:rounded-xl opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity" />
+                          <textarea
+                            name="message"
+                            placeholder="Tell us about your requirements..."
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
+                            rows={3}
+                            className="relative w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 focus:border-cyan-500/50 focus:bg-white/10 text-white text-sm placeholder-gray-500 transition-all outline-none resize-none"
+                          />
+                        </div>
                       </div>
 
                       {/* Trust Indicators */}
