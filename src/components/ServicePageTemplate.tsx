@@ -573,7 +573,7 @@ export default function ServicePageTemplate({
 
                   <div className="landing-trust-points mt-5 grid gap-3 text-left text-xs text-gray-300 min-[520px]:grid-cols-3 sm:mt-6 sm:text-sm">
                     {[
-                      'No credit card required',
+                      'No govt office visit',
                       'Free consultation',
                       '24/7 support',
                     ].map((point) => (
