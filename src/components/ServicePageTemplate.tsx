@@ -451,7 +451,7 @@ export default function ServicePageTemplate({
                   width={250}
                   height={75}
                   priority
-                  className="landing-brand-image h-auto w-[105px] sm:w-[132px]"
+                  className="landing-brand-image h-auto w-[160px] sm:w-[190px]"
                 />
               </Link>
             </div>
@@ -469,7 +469,7 @@ export default function ServicePageTemplate({
 
           <div className="landing-hero-grid grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start">
             {/* Left Column - Content */}
-            <div className="landing-hero-copy text-center lg:text-left">
+            <div className="landing-hero-copy min-w-0 w-full text-center lg:text-left">
               {/* Service Badge */}
               {(subtitle || logo || Icon) && (
                 <div className="landing-service-badge inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-4 sm:mb-6">
@@ -498,12 +498,12 @@ export default function ServicePageTemplate({
                 </p>
               )}
 
-              {/* Trusted Clients Logo Reel - Hidden on mobile, shown on sm+ */}
-              <div className="landing-logo-reel hidden sm:block mb-6 overflow-hidden">
+              {/* Trusted Clients Logo Reel */}
+              <div className="landing-logo-reel mb-5 overflow-hidden sm:mb-6">
                 <p className="text-xs text-gray-400 mb-3 text-center lg:text-left">Helped many global brands achieve compliance</p>
                 <div className="relative overflow-hidden" style={{ maxWidth: '100%' }}>
                   {/* Scrolling container */}
-                  <div className="flex animate-scroll">
+                  <div className="flex w-max animate-scroll">
                     {/* First set of logos */}
                     <div className="flex items-center gap-6 md:gap-8 lg:gap-10 px-4 shrink-0">
                       <img src="/logo/6750381b5985420c3fd6e61f_sony.png" alt="Sony" className="h-8 md:h-9 lg:h-10 w-auto max-w-[100px] md:max-w-[120px] object-contain opacity-80 brightness-0 invert" />
@@ -538,6 +538,57 @@ export default function ServicePageTemplate({
               <div className="landing-hero-description text-sm sm:text-base lg:text-lg text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 {description}
               </div>
+
+              {landingPageMode && (
+                <div className="landing-hero-conversion">
+                  <div className="landing-hero-actions grid grid-cols-1 gap-3 min-[420px]:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
+                    <button
+                      type="button"
+                      onClick={() => setShowContactPopup(true)}
+                      className={`landing-primary-action flex min-h-14 items-center justify-center gap-2 rounded-xl bg-gradient-to-r ${colors.gradient} px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/25 active:translate-y-0 sm:min-h-16 sm:px-7 sm:text-base`}
+                      aria-haspopup="dialog"
+                    >
+                      <span>Start Free Consultation</span>
+                      <ArrowRight size={20} aria-hidden="true" />
+                    </button>
+
+                    <a
+                      href={`tel:${SERVICE_PHONE_NUMBER}`}
+                      onClick={() =>
+                        trackCallClick({
+                          buttonLocation: window.matchMedia('(max-width: 639px)').matches
+                            ? 'navbar_mobile'
+                            : 'navbar',
+                          text: 'Call Now',
+                          phoneNumber: SERVICE_PHONE_NUMBER,
+                        })
+                      }
+                      className="landing-secondary-action flex min-h-14 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-cyan-300/35 hover:bg-white/15 active:translate-y-0 sm:min-h-16 sm:px-7 sm:text-base"
+                      aria-label="Call JR Compliance now"
+                    >
+                      <Phone size={20} aria-hidden="true" />
+                      <span>Call Now</span>
+                    </a>
+                  </div>
+
+                  <div className="landing-trust-points mt-5 grid gap-3 text-left text-xs text-gray-300 min-[520px]:grid-cols-3 sm:mt-6 sm:text-sm">
+                    {[
+                      'No credit card required',
+                      'Free consultation',
+                      '24/7 support',
+                    ].map((point) => (
+                      <div key={point} className="flex items-center gap-2">
+                        <CheckCircle
+                          size={18}
+                          className="shrink-0 text-cyan-400"
+                          aria-hidden="true"
+                        />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
             </div>
 

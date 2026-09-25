@@ -184,6 +184,10 @@ body {
   align-items: start;
 }
 
+.landing-page-premium .landing-hero-grid > * {
+  min-width: 0;
+}
+
 .landing-page-premium .landing-topbar {
   min-height: 2.75rem;
 }
@@ -230,13 +234,22 @@ body {
 }
 
 .landing-page-premium .landing-hero-copy {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   animation: landing-fade-up 700ms ease-out both;
 }
 
 .landing-page-premium .landing-service-badge {
+  max-width: 100%;
   border-color: rgba(103, 232, 249, 0.2);
   background: rgba(15, 23, 42, 0.58);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 45px rgba(2, 6, 23, 0.28);
+}
+
+.landing-page-premium .landing-service-badge > span {
+  min-width: 0;
+  white-space: normal;
 }
 
 .landing-page-premium .landing-title {
@@ -257,8 +270,58 @@ body {
 }
 
 .landing-page-premium .landing-logo-reel {
+  width: 100%;
+  max-width: 100%;
   padding-block: 0.4rem;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.landing-page-premium .landing-logo-reel .animate-scroll {
+  width: max-content;
+}
+
+.landing-page-premium .landing-hero-actions {
+  width: 100%;
+  max-width: 36rem;
+}
+
+.landing-page-premium .landing-hero-conversion {
+  width: 100%;
+  max-width: 100%;
+}
+
+.landing-page-premium .landing-primary-action,
+.landing-page-premium .landing-secondary-action {
+  width: 100%;
+  min-width: 0;
+}
+
+.landing-page-premium .landing-primary-action {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-page-premium .landing-primary-action::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(100deg, transparent 25%, rgba(255, 255, 255, 0.24), transparent 75%);
+  transition: transform 600ms ease;
+}
+
+.landing-page-premium .landing-primary-action:hover::after {
+  transform: translateX(120%);
+}
+
+.landing-page-premium .landing-primary-action > *,
+.landing-page-premium .landing-secondary-action > * {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-page-premium .landing-trust-points {
+  max-width: 42rem;
 }
 
 .landing-page-premium .landing-form-shell {
@@ -434,7 +497,7 @@ body {
   }
 
   .landing-page-premium .landing-topbar {
-    min-height: 2.4rem;
+    min-height: 3.25rem;
   }
 
   .landing-page-premium .landing-breadcrumb {
@@ -450,11 +513,38 @@ body {
   }
 
   .landing-page-premium .landing-brand {
-    min-height: 2.2rem;
+    min-height: 3rem;
+  }
+
+  .landing-page-premium .landing-hero-copy {
+    overflow-x: clip;
   }
 
   .landing-page-premium .landing-title {
     font-size: clamp(2.5rem, 12vw, 3.75rem);
+  }
+
+  .landing-page-premium .landing-logo-reel {
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+  }
+
+  .landing-page-premium .landing-logo-reel .animate-scroll {
+    animation-duration: 16s;
+  }
+
+  .landing-page-premium .landing-logo-reel .shrink-0 {
+    gap: 1.5rem;
+    padding-inline: 0.75rem;
+  }
+
+  .landing-page-premium .landing-logo-reel img {
+    height: 1.8rem;
+    max-width: 6.5rem;
+  }
+
+  .landing-page-premium .landing-hero-conversion {
+    text-align: left;
   }
 
   .landing-page-premium .landing-form-shell {
