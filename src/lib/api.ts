@@ -297,3 +297,104 @@ export function trackWhatsappClick({
     );
   });
 }
+
+export type CallButtonLocation =
+  | 'navbar'
+  | 'navbar_mobile';
+
+interface CallEventPayload {
+  event_info: string;
+  page_name: string;
+  text: string;
+  metadata: {
+    button_location: CallButtonLocation;
+    page_url: string;
+    pathname: string;
+    phone_number: string;
+
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+  };
+}
+
+const CALL_EVENT_URL =
+  'https://testhook.jrcompliance.com/call';
+
+export function trackCallClick({
+  buttonLocation,
+  text,
+  phoneNumber,
+}: {
+  buttonLocation: CallButtonLocation;
+  text: string;
+  phoneNumber: string;
+}) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  try {
+    const searchParams = new URLSearchParams(
+      window.location.search
+    );
+
+    const metadata: CallEventPayload['metadata'] = {
+      button_location: buttonLocation,
+      page_url: window.location.href,
+      pathname: window.location.pathname,
+      phone_number: phoneNumber,
+    };
+
+    const utmSource =
+      searchParams.get('utm_source');
+
+    const utmMedium =
+      searchParams.get('utm_medium');
+
+    const utmCampaign =
+      searchParams.get('utm_campaign');
+
+    if (utmSource) {
+      metadata.utm_source = utmSource;
+    }
+
+    if (utmMedium) {
+      metadata.utm_medium = utmMedium;
+    }
+
+    if (utmCampaign) {
+      metadata.utm_campaign = utmCampaign;
+    }
+
+    const payload: CallEventPayload = {
+      event_info: 'call_click',
+
+      page_name:
+        document.title ||
+        window.location.pathname,
+
+      text,
+
+      metadata,
+    };
+
+    fetch(CALL_EVENT_URL, {
+      method: 'POST',
+
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify(payload),
+
+      keepalive: true,
+
+      credentials: 'omit',
+    }).catch((error) => {
+      console.error('Call tracking failed:', error);
+    });
+  } catch (error) {
+    console.error('Call tracking failed:', error);
+  }
+}

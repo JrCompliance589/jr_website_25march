@@ -33,13 +33,13 @@ const testimonials = [
     content: 'Extremely professional company and very prompt service. I am associated with them from last 4 to 5 years. I am extremely happy and satisfied with the service given by them.',
     rating: 5,
   },
-  {
-    name: 'Ekaterina Okopnaia',
-    role: 'Representative',
-    company: 'Acryl Salavat',
-    content: 'As a representative of Acryl Salavat, a Russian manufacturer, I want to thank Pulkit Arora and Lalit Gupta for their diligence and very productive work on our FMCS project. They worked quickly, helped us through different issues, and remained flexible even though our payment approval system and contract process are very complex. We successfully passed the audit, received the license, and completed its renewal within the established timeframe. As a Russian entity, we face certain challenges, but with the JR team\'s help, we are successfully overcoming them.',
-    rating: 5,
-  },
+  // {
+  //   name: 'Ekaterina Okopnaia',
+  //   role: 'Representative',
+  //   company: 'Acryl Salavat',
+  //   content: 'As a representative of Acryl Salavat, a Russian manufacturer, I want to thank Pulkit Arora and Lalit Gupta for their diligence and very productive work on our FMCS project. They worked quickly, helped us through different issues, and remained flexible even though our payment approval system and contract process are very complex. We successfully passed the audit, received the license, and completed its renewal within the established timeframe. As a Russian entity, we face certain challenges, but with the JR team\'s help, we are successfully overcoming them.',
+  //   rating: 5,
+  // },
 ];
 
 export default function Testimonials() {

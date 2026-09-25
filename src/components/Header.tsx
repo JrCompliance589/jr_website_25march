@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
-import { trackWhatsappClick } from '@/lib/api';
+import {
+  trackWhatsappClick,
+  trackCallClick,
+} from '@/lib/api';
 import { Menu, X, ChevronDown, ChevronRight, Phone, ArrowRight, Search, Building2, FileText, Globe, Shield, Lightbulb, UtensilsCrossed, TrendingUp, Calculator, Users, Coins, Cpu, Factory, Radio, Wifi, Home, MessageCircle } from 'lucide-react';
 
 // Corporate Services Categories
@@ -679,6 +682,13 @@ export default function Header() {
             {/* Phone */}
             <a 
               href="tel:1800121410410" 
+              onClick={() => {
+                trackCallClick({
+                  buttonLocation: 'navbar',
+                  text: '1800-121-410-410',
+                  phoneNumber: '1800121410410',
+                });
+              }}
               className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
             >
               <Phone size={16} />
@@ -709,6 +719,13 @@ export default function Header() {
             {/* Mobile Call Button */}
             <a
               href="tel:1800121410410"
+              onClick={() => {
+                trackCallClick({
+                  buttonLocation: 'navbar_mobile',
+                  text: '1800-121-410-410',
+                  phoneNumber: '1800121410410',
+                });
+              }}
               className="p-2 text-white/80 hover:text-white transition-colors"
               aria-label="Call us"
             >
@@ -968,6 +985,13 @@ function MobileMenuModal({
             <div className="pt-4 space-y-3 border-t border-white/10 mt-4">
               <a
                 href="tel:1800121410410"
+                onClick={() => {
+                  trackCallClick({
+                    buttonLocation: 'navbar_mobile',
+                    text: '1800-121-410-410',
+                    phoneNumber: '1800121410410',
+                  });
+                }}
                 className="flex items-center justify-center gap-2 w-full px-4 py-3.5 bg-white/5 border border-white/10 text-white font-medium text-base rounded-xl hover:bg-white/10 transition-colors"
               >
                 <Phone size={20} />

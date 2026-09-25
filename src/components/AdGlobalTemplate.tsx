@@ -38,7 +38,6 @@ const countryCodes = [
   { code: '+82', flag: '🇰🇷', name: 'South Korea', minLen: 10, maxLen: 11 },
   { code: '+55', flag: '🇧🇷', name: 'Brazil', minLen: 10, maxLen: 11 },
   { code: '+52', flag: '🇲🇽', name: 'Mexico', minLen: 10, maxLen: 10 },
-  { code: '+7', flag: '🇷🇺', name: 'Russia', minLen: 10, maxLen: 10 },
   { code: '+27', flag: '🇿🇦', name: 'South Africa', minLen: 9, maxLen: 9 },
   { code: '+966', flag: '🇸🇦', name: 'Saudi Arabia', minLen: 9, maxLen: 9 },
   { code: '+39', flag: '🇮🇹', name: 'Italy', minLen: 9, maxLen: 10 },
