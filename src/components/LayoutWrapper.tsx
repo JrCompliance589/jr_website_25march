@@ -7,7 +7,7 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAdPage = pathname.startsWith('/ad');
+  const isAdPage = pathname.startsWith('/ad') || pathname.startsWith('/gpt-ad');
 
   if (isAdPage) {
     return <main>{children}</main>;

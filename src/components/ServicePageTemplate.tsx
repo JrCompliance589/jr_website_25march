@@ -22,10 +22,20 @@ import {
   Lock,
   FileCheck,
   Sparkles,
-  AlertCircle
+  AlertCircle,
+  X,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
-import { submitLeadWithAutoDetection, getUtmParameters } from '@/lib/api';
+import {
+  submitLeadWithAutoDetection,
+  getUtmParameters,
+  trackCallClick,
+  trackWhatsappClick,
+} from '@/lib/api';
+
+const SERVICE_PHONE_NUMBER = '1800121410410';
+const SERVICE_WHATSAPP_URL =
+  'https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0';
 
 interface ServicePageProps {
   title: string;
@@ -44,6 +54,8 @@ interface ServicePageProps {
   faqs: { question: string; answer: string }[];
   stats?: { value: string; label: string }[];
   trustedBy?: string[];
+  contactPopupDelayMs?: number;
+  landingPageMode?: boolean;
 }
 
 export default function ServicePageTemplate({
@@ -61,6 +73,8 @@ export default function ServicePageTemplate({
   process,
   documents,
   faqs,
+  contactPopupDelayMs,
+  landingPageMode = false,
   stats = [
     { value: '5000+', label: 'Certifications Done' },
     { value: '4.9', label: 'Google Rating' },
@@ -82,6 +96,7 @@ export default function ServicePageTemplate({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [showContactPopup, setShowContactPopup] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
   const currentStep = formData.phone.length === 10 ? 3 : formData.email.includes('@') ? 2 : formData.name.length > 2 ? 1 : 0;
@@ -162,6 +177,39 @@ export default function ServicePageTemplate({
     };
   }, []);
 
+  useEffect(() => {
+    if (contactPopupDelayMs === undefined) {
+      return;
+    }
+
+    const popupTimer = window.setTimeout(() => {
+      setShowContactPopup(true);
+    }, contactPopupDelayMs);
+
+    return () => window.clearTimeout(popupTimer);
+  }, [contactPopupDelayMs]);
+
+  useEffect(() => {
+    if (!showContactPopup) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowContactPopup(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showContactPopup]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -195,8 +243,182 @@ export default function ServicePageTemplate({
     }
   };
 
+  const renderConsultationForm = () => (
+    <div className="p-4 sm:p-6">
+      {isSubmitted ? (
+        <div className="text-center py-8">
+          <div className="relative w-20 h-20 mx-auto mb-4">
+            <div className="absolute inset-0 bg-emerald-500/20 rounded-full animate-ping" />
+            <div className="relative w-full h-full bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center">
+              <CheckCircle size={36} className="text-white" />
+            </div>
+          </div>
+          <h4 className="text-xl font-bold text-white mb-2">Request Submitted!</h4>
+          <p className="text-gray-400 text-sm">Our expert will call you within 30 minutes</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg sm:rounded-xl opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity" />
+            <div className="relative">
+              <Users size={16} className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-cyan-400 transition-colors sm:w-[18px] sm:h-[18px]" />
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 focus:border-cyan-500/50 focus:bg-white/10 text-white text-sm sm:text-base placeholder-gray-500 transition-all outline-none"
+              />
+              {formData.name.length > 2 && (
+                <CheckCircle size={16} className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-emerald-400 sm:w-[18px] sm:h-[18px]" />
+              )}
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg sm:rounded-xl opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity" />
+            <div className="relative">
+              <svg className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-[18px] sm:h-[18px] text-gray-500 group-focus-within:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v10a2 2 0 002 2z" />
+              </svg>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 focus:border-cyan-500/50 focus:bg-white/10 text-white text-sm sm:text-base placeholder-gray-500 transition-all outline-none"
+              />
+              {formData.email.includes('@') && formData.email.includes('.') && (
+                <CheckCircle size={16} className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-emerald-400 sm:w-[18px] sm:h-[18px]" />
+              )}
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg sm:rounded-xl opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity" />
+            <div className="relative flex">
+              <span className="inline-flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 rounded-l-lg sm:rounded-l-xl bg-white/10 border border-r-0 border-white/10 text-cyan-400 font-medium text-xs sm:text-sm">
+                <span>🇮🇳</span>
+                <span>+91</span>
+              </span>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Mobile Number"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                pattern="[0-9]{10}"
+                className="w-full pl-3 sm:pl-4 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-r-lg sm:rounded-r-xl bg-white/5 border border-l-0 border-white/10 focus:border-cyan-500/50 focus:bg-white/10 text-white text-sm sm:text-base placeholder-gray-500 transition-all outline-none"
+              />
+              {formData.phone.length === 10 && (
+                <CheckCircle size={16} className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-emerald-400 sm:w-[18px] sm:h-[18px]" />
+              )}
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg sm:rounded-xl opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity" />
+              <textarea
+                name="message"
+                placeholder="Tell us about your requirements..."
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={3}
+                className="relative w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 focus:border-cyan-500/50 focus:bg-white/10 text-white text-sm placeholder-gray-500 transition-all outline-none resize-none"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between py-1.5 sm:py-2 px-0.5 sm:px-1">
+            <div className="flex items-center gap-2 sm:gap-4 text-[10px] sm:text-xs text-gray-500">
+              <span className="flex items-center gap-0.5 sm:gap-1"><Shield size={10} className="text-cyan-400 sm:w-3 sm:h-3" /> Secure</span>
+              <span className="flex items-center gap-0.5 sm:gap-1"><Clock size={10} className="text-cyan-400 sm:w-3 sm:h-3" /> 2 min</span>
+            </div>
+            <span className="text-[10px] sm:text-xs text-gray-500">No spam, ever</span>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="relative w-full py-3 sm:py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 bg-[length:200%_100%] hover:bg-right text-white rounded-lg sm:rounded-xl font-bold text-sm sm:text-base transition-all duration-500 flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] overflow-hidden group"
+          >
+            <span className="relative z-10">{isSubmitting ? 'Submitting...' : 'Get Free Consultation'}</span>
+            {isSubmitting ? (
+              <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform sm:w-5 sm:h-5" />
+            )}
+          </button>
+
+          {submitError && (
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+              <AlertCircle size={16} className="flex-shrink-0" />
+              <span>{submitError}</span>
+            </div>
+          )}
+        </form>
+      )}
+    </div>
+  );
+
   return (
-    <>
+    <div className={landingPageMode ? 'landing-page-premium' : undefined}>
+      {showContactPopup && (
+        <div
+          className="landing-popup-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 p-3 sm:p-6 backdrop-blur-sm"
+          onMouseDown={() => setShowContactPopup(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-popup-title"
+            className="landing-popup-dialog relative w-full max-w-md max-h-[calc(100vh-1.5rem)] overflow-y-auto rounded-2xl border border-white/10 bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 shadow-2xl shadow-black/60"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowContactPopup(false)}
+              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-slate-950/70 text-gray-300 transition-colors hover:bg-white/10 hover:text-white"
+              aria-label="Close consultation form"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="relative border-b border-white/5 bg-gradient-to-r from-blue-600/10 via-cyan-500/5 to-purple-600/10 px-6 py-5 pr-16">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.15),transparent_50%)]" />
+              <div className="relative">
+                <h2 id="contact-popup-title" className="text-lg font-bold text-white">Get Expert Consultation</h2>
+                <p className="mt-0.5 text-xs text-gray-400">Free quote in 2 minutes</p>
+              </div>
+              <div className="relative mt-4 flex items-center gap-2">
+                {[1, 2, 3].map((step) => (
+                  <div key={step} className="flex flex-1 items-center gap-2">
+                    <div className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-all ${currentStep >= step
+                      ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/30'
+                      : 'border border-white/10 bg-white/5 text-gray-500'
+                      }`}>
+                      {currentStep > step ? <CheckCircle size={14} /> : step}
+                    </div>
+                    {step < 3 && (
+                      <div className={`h-0.5 flex-1 rounded-full transition-all ${currentStep > step ? 'bg-gradient-to-r from-blue-500 to-cyan-500' : 'bg-white/10'}`} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {renderConsultationForm()}
+          </div>
+        </div>
+      )}
+
       {/* WhatsApp Floating Button */}
       {/* <a
         href="https://wa.me/919266450125"
@@ -209,7 +431,7 @@ export default function ServicePageTemplate({
       </a> */}
 
       {/* Hero Section - Dark Theme matching homepage */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 pt-20 sm:pt-24 pb-8 sm:pb-12 lg:pb-16">
+      <section className="landing-hero relative min-h-[60vh] sm:min-h-[70vh] overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 pt-20 sm:pt-24 pb-8 sm:pb-12 lg:pb-16">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl" />
@@ -219,19 +441,38 @@ export default function ServicePageTemplate({
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Compact landing-page brand row */}
+          {landingPageMode && (
+            <div className="landing-topbar mb-2 flex items-center justify-start sm:mb-3">
+              <Link href="/" className="landing-brand" aria-label="JR Compliance home">
+                <Image
+                  src="/JRlogo.png"
+                  alt="JR Compliance"
+                  width={250}
+                  height={75}
+                  priority
+                  className="landing-brand-image h-auto w-[105px] sm:w-[132px]"
+                />
+              </Link>
+            </div>
+          )}
+
           {/* Breadcrumb */}
-          <div className="mb-4 sm:mb-6 lg:mb-8">
+          <nav
+            aria-label="Breadcrumb"
+            className="landing-breadcrumb mb-4 min-w-0 whitespace-nowrap sm:mb-5"
+          >
             <Link href="/" className="text-gray-400 hover:text-white text-xs sm:text-sm font-medium transition-colors">Home</Link>
             <span className="mx-2 text-gray-600">/</span>
             <span className="text-white font-medium text-xs sm:text-sm">{title}</span>
-          </div>
+          </nav>
 
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start">
+          <div className="landing-hero-grid grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start">
             {/* Left Column - Content */}
-            <div className="text-center lg:text-left">
+            <div className="landing-hero-copy text-center lg:text-left">
               {/* Service Badge */}
               {(subtitle || logo || Icon) && (
-                <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-4 sm:mb-6">
+                <div className="landing-service-badge inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-4 sm:mb-6">
                   <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg ${logo ? 'bg-white' : `bg-gradient-to-br ${colors.gradient}`} flex items-center justify-center overflow-hidden`}>
                     {logo ? (
                       <Image src={logo} alt={title} width={24} height={24} className="object-contain" />
@@ -244,7 +485,7 @@ export default function ServicePageTemplate({
               )}
 
               {/* Main Heading */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 sm:mb-6">
+              <h1 className="landing-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 sm:mb-6">
                 <span className={`md:whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r ${colors.gradient}`}>
                   {title}
                 </span>
@@ -258,7 +499,7 @@ export default function ServicePageTemplate({
               )}
 
               {/* Trusted Clients Logo Reel - Hidden on mobile, shown on sm+ */}
-              <div className="hidden sm:block mb-6 overflow-hidden">
+              <div className="landing-logo-reel hidden sm:block mb-6 overflow-hidden">
                 <p className="text-xs text-gray-400 mb-3 text-center lg:text-left">Helped many global brands achieve compliance</p>
                 <div className="relative overflow-hidden" style={{ maxWidth: '100%' }}>
                   {/* Scrolling container */}
@@ -294,14 +535,14 @@ export default function ServicePageTemplate({
               </div>
 
               {/* Description */}
-              <div className="text-sm sm:text-base lg:text-lg text-gray-400 mb-6 sm:mb-8 leading-relaxed">
+              <div className="landing-hero-description text-sm sm:text-base lg:text-lg text-gray-400 mb-6 sm:mb-8 leading-relaxed">
                 {description}
               </div>
 
             </div>
 
             {/* Right Column - Form Card */}
-            <div ref={formRef} className="w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:ml-auto relative mt-4 lg:mt-0 overflow-hidden">
+            <div ref={formRef} className="landing-form-shell w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:ml-auto relative mt-4 lg:mt-0 overflow-hidden">
               {/* Floating Badge */}
               {/* <div className="absolute -top-3 sm:-top-4 left-4 sm:left-6 z-10">
                 <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs font-semibold shadow-lg shadow-emerald-500/25">
@@ -310,7 +551,7 @@ export default function ServicePageTemplate({
                 </div>
               </div> */}
 
-              <div className="bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden w-full max-w-full">
+              <div className="landing-form-card bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden w-full max-w-full">
                 {/* Premium Header */}
                 <div className="relative px-6 py-5 bg-gradient-to-r from-blue-600/10 via-cyan-500/5 to-purple-600/10 border-b border-white/5">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.15),transparent_50%)]" />
@@ -559,7 +800,7 @@ export default function ServicePageTemplate({
       {additionalContent}
 
       {/* Process Section - Dark Theme */}
-      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
+      {showDefaultSections && <section className="landing-section landing-process py-10 sm:py-14 lg:py-20 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-3 sm:mb-4">
@@ -577,7 +818,7 @@ export default function ServicePageTemplate({
                 key={index}
                 className="relative group"
               >
-                <div className="p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all h-full">
+                <div className="landing-card p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all h-full">
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 text-white font-bold text-sm sm:text-base lg:text-lg`}>
                     {index + 1}
                   </div>
@@ -594,7 +835,7 @@ export default function ServicePageTemplate({
       </section>}
 
       {/* Documents Section - Dark Theme */}
-      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
+      {showDefaultSections && <section className="landing-section landing-documents py-10 sm:py-14 lg:py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -606,7 +847,7 @@ export default function ServicePageTemplate({
             {documents.map((doc, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/5"
+                className="landing-card flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/5"
               >
                 <CheckCircle size={16} className={`${colors.text} sm:w-5 sm:h-5 flex-shrink-0`} />
                 <span className="text-sm sm:text-base text-white">{doc}</span>
@@ -623,7 +864,7 @@ export default function ServicePageTemplate({
 
 
       {/* Why Choose JR Compliance Section */}
-      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
+      {showDefaultSections && <section className="landing-section landing-why py-10 sm:py-14 lg:py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -642,7 +883,7 @@ export default function ServicePageTemplate({
               { icon: Users, title: 'Expert Guidance', desc: 'Dedicated support, quick replies!' },
               { icon: Award, title: 'Quality', desc: 'Expert guidance, 100% compliance!' },
             ].map((item) => (
-              <div key={item.title} className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all text-center">
+              <div key={item.title} className="landing-card group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all text-center">
                 <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-3 sm:mb-4 mx-auto group-hover:scale-110 transition-transform`}>
                   <item.icon size={20} className="text-white sm:w-6 sm:h-6" />
                 </div>
@@ -656,7 +897,7 @@ export default function ServicePageTemplate({
             {benefits.map((benefit, index) => (
               <div
                 key={index}
-                className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all"
+                className="landing-card group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all"
               >
                 <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform`}>
                   <CheckCircle size={20} className="text-white sm:w-6 sm:h-6" />
@@ -669,7 +910,7 @@ export default function ServicePageTemplate({
       </section>}
 
       {/* FAQs Section - Dark Theme */}
-      {showDefaultSections && <section className="py-10 sm:py-14 lg:py-20 bg-slate-950">
+      {showDefaultSections && <section className="landing-section landing-faq py-10 sm:py-14 lg:py-20 bg-slate-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -681,7 +922,7 @@ export default function ServicePageTemplate({
             {currentFaqs.map((faq, index) => (
               <div
                 key={index}
-                className="rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 overflow-hidden"
+                className="landing-faq-item rounded-xl sm:rounded-2xl bg-white/5 border border-white/5 overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
@@ -729,7 +970,7 @@ export default function ServicePageTemplate({
       </section>}
 
       {/* CTA Section - Dark Theme */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-900">
+      <section className="landing-final-cta py-10 sm:py-14 lg:py-20 bg-slate-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
             Ready to Get <span className={colors.text}>{title}?</span>
@@ -739,16 +980,30 @@ export default function ServicePageTemplate({
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
-              href="tel:1800121410410"
+              href={`tel:${SERVICE_PHONE_NUMBER}`}
+              onClick={() =>
+                trackCallClick({
+                  buttonLocation: 'navbar',
+                  text: 'Call: 1800-121-410-410',
+                  phoneNumber: SERVICE_PHONE_NUMBER,
+                })
+              }
               className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r ${colors.gradient} text-white font-semibold rounded-lg sm:rounded-xl hover:opacity-90 transition-all shadow-lg text-sm sm:text-base`}
             >
               <Phone size={18} className="sm:w-5 sm:h-5" />
               <span>Call: 1800-121-410-410</span>
             </a>
             <a
-              href="https://api.whatsapp.com/send?phone=919266450125&text=Hi%2C+I+need+help+with+compliance+services&type=phone_number&app_absent=0"
+              href={SERVICE_WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackWhatsappClick({
+                  buttonLocation: 'service_page_cta',
+                  text: 'WhatsApp Us',
+                  whatsappUrl: SERVICE_WHATSAPP_URL,
+                })
+              }
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg sm:rounded-xl border border-white/10 transition-all text-sm sm:text-base"
             >
               <MessageCircle size={18} className="sm:w-5 sm:h-5" />
@@ -760,6 +1015,7 @@ export default function ServicePageTemplate({
 
       {/* Sticky Bottom Bar - Left & Right Layout */}
       <div
+        data-landing-sticky-bar={landingPageMode || undefined}
         className={`fixed bottom-0 left-0 right-0 z-40 transition-all duration-500 ${showStickyBar
           ? "translate-y-0 opacity-100"
           : "translate-y-full opacity-0 pointer-events-none"
@@ -803,16 +1059,31 @@ export default function ServicePageTemplate({
 
             {/* Right - CTA */}
             <div className="flex flex-col items-end gap-1 flex-shrink-0">
-              <Link
-                href="/contact"
-                className={`flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 bg-gradient-to-r ${colors.gradient} hover:opacity-90 text-white font-bold text-sm sm:text-base rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-xl`}
-              >
-                <span className="hidden sm:inline">
-                  Speak with a Compliance Expert
-                </span>
-                <span className="sm:hidden">Consult</span>
-                <ArrowRight size={16} className="sm:w-5 sm:h-5" />
-              </Link>
+              {landingPageMode ? (
+                <button
+                  type="button"
+                  onClick={() => setShowContactPopup(true)}
+                  className={`landing-sticky-cta flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 bg-gradient-to-r ${colors.gradient} hover:opacity-90 text-white font-bold text-sm sm:text-base rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-xl`}
+                  aria-haspopup="dialog"
+                >
+                  <span className="hidden sm:inline">
+                    Speak with a Compliance Expert
+                  </span>
+                  <span className="sm:hidden">Consult</span>
+                  <ArrowRight size={16} className="sm:w-5 sm:h-5" />
+                </button>
+              ) : (
+                <Link
+                  href="/contact"
+                  className={`flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 bg-gradient-to-r ${colors.gradient} hover:opacity-90 text-white font-bold text-sm sm:text-base rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-xl`}
+                >
+                  <span className="hidden sm:inline">
+                    Speak with a Compliance Expert
+                  </span>
+                  <span className="sm:hidden">Consult</span>
+                  <ArrowRight size={16} className="sm:w-5 sm:h-5" />
+                </Link>
+              )}
 
               {/* CTA Subtext */}
               <span className="text-gray-500 text-[11px] sm:text-xs hidden sm:block">
@@ -825,6 +1096,6 @@ export default function ServicePageTemplate({
       </div>
 
 
-    </>
+    </div>
   );
 }

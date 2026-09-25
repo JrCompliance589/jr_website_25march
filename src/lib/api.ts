@@ -1,5 +1,6 @@
-// Webhook API Configuration
-const WEBHOOK_BASE_URL = 'https://testhook.jrcompliance.com';
+// Lead requests go through a same-origin API route so browser CORS policies do
+// not block submissions to the external webhook.
+const LEAD_API_BASE_URL = '/api/leads';
 
 // Lead Types
 export type LeadType = 'corporate' | 'technical' | 'global';
@@ -35,6 +36,7 @@ export interface LeadResponse {
  * - /corporate/* -> corporate
  * - /ad-global/* -> global
  * - /ad/* -> technical (landing pages)
+ * - /gpt-ad/* -> technical (landing pages)
  * - others (contact, home, etc.) -> global
  */
 function matchesRoute(pathname: string, route: string): boolean {
@@ -52,6 +54,9 @@ export function getLeadTypeFromPath(pathname: string): LeadType {
     return 'global';
   }
   if (matchesRoute(pathname, '/ad')) {
+    return 'technical';
+  }
+  if (matchesRoute(pathname, '/gpt-ad')) {
     return 'technical';
   }
   return 'global';
@@ -87,7 +92,7 @@ export async function submitLead(
   leadType: LeadType,
   payload: LeadPayload
 ): Promise<LeadResponse> {
-  const endpoint = `${WEBHOOK_BASE_URL}/${leadType}`;
+  const endpoint = `${LEAD_API_BASE_URL}/${leadType}`;
   
   try {
     const response = await fetch(endpoint, {
@@ -96,12 +101,13 @@ export async function submitLead(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+      credentials: 'same-origin',
     });
-    
-    const data = await response.json();
+
+    const data = (await response.json().catch(() => ({}))) as LeadResponse;
     
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to submit lead');
+      throw new Error(data.error || data.message || 'Failed to submit lead');
     }
     
     return data;
@@ -193,7 +199,8 @@ export type WhatsappButtonLocation =
   | 'navbar_corporate_menu'
   | 'navbar_technical_menu'
   | 'navbar_mobile'
-  | 'floating';
+  | 'floating'
+  | 'service_page_cta';
 
 interface WhatsappEventPayload {
   event_info: string;
@@ -212,7 +219,42 @@ interface WhatsappEventPayload {
 }
 
 const WHATSAPP_EVENT_URL =
-  'https://testhook.jrcompliance.com/whatsapp';
+  '/api/tracking/whatsapp';
+
+function sendClickEvent(
+  endpoint: string,
+  payload: WhatsappEventPayload | CallEventPayload,
+  eventLabel: string
+) {
+  const body = JSON.stringify(payload);
+
+  try {
+    if (typeof navigator.sendBeacon === 'function') {
+      const queued = navigator.sendBeacon(
+        endpoint,
+        new Blob([body], { type: 'application/json' })
+      );
+
+      if (queued) {
+        return;
+      }
+    }
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+      keepalive: true,
+      credentials: 'same-origin',
+    }).catch((error) => {
+      console.error(`${eventLabel} tracking failed:`, error);
+    });
+  } catch (error) {
+    console.error(`${eventLabel} tracking failed:`, error);
+  }
+}
 
 export function trackWhatsappClick({
   buttonLocation,
@@ -271,31 +313,11 @@ export function trackWhatsappClick({
     metadata,
   };
 
-  /*
-   * Fire-and-forget.
-   *
-   * We intentionally don't await this request,
-   * because WhatsApp should open immediately
-   * even if tracking fails.
-   */
-  fetch(WHATSAPP_EVENT_URL, {
-    method: 'POST',
-
-    headers: {
-      'Content-Type': 'application/json',
-    },
-
-    body: JSON.stringify(payload),
-
-    keepalive: true,
-
-    credentials: 'omit',
-  }).catch((error) => {
-    console.error(
-      'WhatsApp tracking failed:',
-      error
-    );
-  });
+  sendClickEvent(
+    WHATSAPP_EVENT_URL,
+    payload,
+    'WhatsApp'
+  );
 }
 
 export type CallButtonLocation =
@@ -319,7 +341,7 @@ interface CallEventPayload {
 }
 
 const CALL_EVENT_URL =
-  'https://testhook.jrcompliance.com/call';
+  '/api/tracking/call';
 
 export function trackCallClick({
   buttonLocation,
@@ -379,21 +401,11 @@ export function trackCallClick({
       metadata,
     };
 
-    fetch(CALL_EVENT_URL, {
-      method: 'POST',
-
-      headers: {
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify(payload),
-
-      keepalive: true,
-
-      credentials: 'omit',
-    }).catch((error) => {
-      console.error('Call tracking failed:', error);
-    });
+    sendClickEvent(
+      CALL_EVENT_URL,
+      payload,
+      'Call'
+    );
   } catch (error) {
     console.error('Call tracking failed:', error);
   }
