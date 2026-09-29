@@ -56,6 +56,7 @@ interface ServicePageProps {
   trustedBy?: string[];
   contactPopupDelayMs?: number;
   landingPageMode?: boolean;
+  finalCtaContent?: React.ReactNode;
 }
 
 export default function ServicePageTemplate({
@@ -75,6 +76,7 @@ export default function ServicePageTemplate({
   faqs,
   contactPopupDelayMs,
   landingPageMode = false,
+  finalCtaContent,
   stats = [
     { value: '5000+', label: 'Certifications Done' },
     { value: '4.9', label: 'Google Rating' },
@@ -1029,6 +1031,7 @@ export default function ServicePageTemplate({
           <p className="text-sm sm:text-base text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto">
             Get expert assistance from our team. We&apos;ll guide you through the entire process.
           </p>
+          {finalCtaContent}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
               href={`tel:${SERVICE_PHONE_NUMBER}`}
